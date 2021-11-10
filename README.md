@@ -10,7 +10,7 @@ Port of the Python [bisect](https://docs.python.org/3/library/bisect.html)
 library to the Dart language designed specifically for sectarian bees.
 
 - Maintains a list in sorted order without having to sort
-  the list after each insertion.
+  the list after each insertion
 - Searches for values in a sorted list quickly and efficiently
 
 ## Basic example
