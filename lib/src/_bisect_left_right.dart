@@ -12,7 +12,6 @@ int default_compare<T>(T a, T b) {
 }
 
 int bisectRight<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}) {
-  // todo test custom compare
   compare ??= default_compare;
 
   if (lo < 0) {
@@ -44,7 +43,6 @@ int bisectRight<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}
 }
 
 int bisectLeft<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}) {
-  // todo test custom compare
   compare ??= default_compare;
 
   //if (lo == null) lo = 0;

@@ -5,18 +5,23 @@ import '_bisect_left_right.dart' as brl;
 import '_common.dart';
 
 extension SortedListExtension<T> on List<T> {
+  /// Assuming the list is sorted, locate the insertion point for [item] in a to maintain sorted order.
   int bisectLeft(T item, {Comparator<T>? compare, int low = 0, int? high}) {
     return brl.bisectLeft(this, item, compare: compare, lo: low, hi: high);
   }
 
+  /// Similar to [bisectLeft], but returns an insertion point which comes after (to the right of)
+  /// any existing entries of [item] in the list.
   int bisectRight(T item, {Comparator<T>? compare, int low = 0, int? high}) {
     return brl.bisectRight(this, item, compare: compare, lo: low, hi: high);
   }
 
+  /// Assuming the list is sorted, insert [item] in list in sorted order.
   void insortLeft(T item, {Comparator<T>? compare, int low = 0, int? high}) {
     this.insert(this.bisectLeft(item, compare: compare, low: low, high: high), item);
   }
 
+  /// Similar to [insortLeft], but inserting [item] in list after any existing entries of [item].
   void insortRight(T item, {Comparator<T>? compare, int low = 0, int? high}) {
     this.insert(this.bisectRight(item, compare: compare, low: low, high: high), item);
   }
@@ -65,29 +70,5 @@ extension SortedListExtension<T> on List<T> {
       return i;
     }
     throw ItemNotFoundError();
-  }
-
-  /// Assuming the list is sorted, get rightmost value less than [x].
-  @Deprecated('Excessive method to be removed')  // since 2021-11
-  T bisectValueLT(T x, {Comparator<T>? compare, int low = 0, int? high}) {
-    return this[bisectIndexLT(x, compare: compare, low: low, high: high)];
-  }
-
-  /// Assuming the list is sorted, get rightmost value less than or equal to [x].
-  @Deprecated('Excessive method to be removed')  // since 2021-11
-  T bisectValueLE(T x, {Comparator<T>? compare, int low = 0, int? high}) {
-    return this[bisectIndexLE(x, compare: compare, low: low, high: high)];
-  }
-
-  /// Assuming the list is sorted, get leftmost value greater than [x]
-  @Deprecated('Excessive method to be removed')  // since 2021-11
-  T bisectValueGT(T x, {Comparator<T>? compare, int low = 0, int? high}) {
-    return this[bisectIndexGT(x, compare: compare, low: low, high: high)];
-  }
-
-  /// Assuming the list is sorted, get leftmost item greater than or equal to [x].
-  @Deprecated('Excessive method to be removed')  // since 2021-11
-  T bisectValueGE(T x, {Comparator<T>? compare, int low = 0, int? high}) {
-    return this[bisectIndexGE(x, compare: compare, low: low, high: high)];
   }
 }
