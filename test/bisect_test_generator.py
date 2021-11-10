@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: (c) 2019 Artёm IG <github.com/rtmigo>
+# SPDX-License-Identifier: MIT
+
 from bisect import bisect_right, bisect_left
 
 A = [0, 1, 2, 2, 2, 2, 3, 3, 5, 6]
