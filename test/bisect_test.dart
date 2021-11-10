@@ -1,9 +1,8 @@
 // SPDX-FileCopyrightText: (c) 2019 Artёm IG <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-
 import 'package:beesect/beesect.dart';
-import "package:test/test.dart";
+import 'package:test/test.dart';
 
 void main() {
   void checkBSR(bsr) {
