@@ -68,21 +68,25 @@ extension SortedListExtension<T> on List<T> {
   }
 
   /// Assuming the list is sorted, get rightmost value less than [x].
+  @Deprecated('Excessive method to be removed')  // since 2021-11
   T bisectValueLT(T x, {Comparator<T>? compare, int low = 0, int? high}) {
     return this[bisectIndexLT(x, compare: compare, low: low, high: high)];
   }
 
   /// Assuming the list is sorted, get rightmost value less than or equal to [x].
+  @Deprecated('Excessive method to be removed')  // since 2021-11
   T bisectValueLE(T x, {Comparator<T>? compare, int low = 0, int? high}) {
     return this[bisectIndexLE(x, compare: compare, low: low, high: high)];
   }
 
   /// Assuming the list is sorted, get leftmost value greater than [x]
+  @Deprecated('Excessive method to be removed')  // since 2021-11
   T bisectValueGT(T x, {Comparator<T>? compare, int low = 0, int? high}) {
     return this[bisectIndexGT(x, compare: compare, low: low, high: high)];
   }
 
   /// Assuming the list is sorted, get leftmost item greater than or equal to [x].
+  @Deprecated('Excessive method to be removed')  // since 2021-11
   T bisectValueGE(T x, {Comparator<T>? compare, int low = 0, int? high}) {
     return this[bisectIndexGE(x, compare: compare, low: low, high: high)];
   }

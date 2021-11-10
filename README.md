@@ -35,8 +35,6 @@ library, [search functions](https://docs.python.org/3/library/bisect.html#search
 such as `index`, `find_lt`, `find_le`, `find_gt`, `find_ge` are also
 implemented.
 
-### Locate items
-
 ```dart
 import 'package:beesect/beesect.dart';
 
@@ -59,28 +57,5 @@ void main() {
 
   // index of leftmost Greater Than 'C'
   print(list.bisectIndexGT('C')); // 1
-}
-```
-
-### Find and get item values
-
-```dart
-import 'package:beesect/beesect.dart';
-
-void main() {
-  // The list must be sorted
-  var list = ['A', 'B', 'C', 'D', 'E'];
-
-  // value of rightmost item Less than or Equal to 'C'
-  print(list.bisectValueLE('C')); // C
-
-  // value of rightmost item Less Than 'C'
-  print(list.bisectValueLT('C')); // B
-
-  // value if leftmost item Greater than or Equal to 'C'
-  print(list.bisectValueGE('C')); // C
-
-  // value of leftmost Greater Than 'C'
-  print(list.bisectValueGT('C')); // D
 }
 ```
