@@ -1,7 +1,7 @@
 # [beesect](https://github.com/rtmigo/beesect_dart)
 
-Port of the Python `bisect` library to the Dart language.
-
+Port of the Python `bisect` library to the Dart language designed for sectarian
+bees.
 
 ## Basic example
 
@@ -13,20 +13,21 @@ void main() {
   var list = ['A', 'B', 'C', 'E'];
 
   // Find the index of an item in a sorted list
-  print(list.bisectLeft('B'));  // prints 1
+  print(list.bisectLeft('B')); // prints 1
 
   // find the future index for a non-existent item
-  print(list.bisectLeft('D'));  // prints 3
+  print(list.bisectLeft('D')); // prints 3
 
   // add an item to the list while keeping the list sorted
   list.insortLeft('D');
-  print(list);  // [A, B, C, D, E]
+  print(list); // [A, B, C, D, E]
 }
 ```
 
 ## Searching in sorted lists
 
-In addition to the basic functions of the `bisect` library, [search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists) 
+In addition to the basic functions of the `bisect`
+library, [search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists)
 such as `index`, `find_lt`, `find_le`, `find_gt`, `find_ge` are implemented:
 
 ### Locate items
