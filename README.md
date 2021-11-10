@@ -30,7 +30,32 @@ import 'package:beesect/beesect.dart';
 import 'package:beesect/beesect.dart';
 
 void main() {
-  sorted_list = [1, 3, 5, 7, 9];
-  print(bisectRightNum(items, 5));
+  // the list must be sorted
+  var list = ['A', 'B', 'C', 'E'];
+
+  // Find the index of an item in a sorted list
+  print(bisectLeft(list, 'B'));  // prints 1
+
+  // find the future index for a non-existent item
+  print(bisectLeft(list, 'D'));  // prints 3
+
+  // add an item to the list while keeping the list sorted
+  insortLeft(list, 'D');
+  print(list);  // [A, B, C, D, E]
 }
+```
+
+# Lists of numbers
+
+`beesect` functions work with lists of objects implementing the `Comparable` class.
+
+Although numbers like int do not implement this class, the problem is easily solved as follows.
+
+```dart
+List<int> numbers = [1, 2, 3];
+
+// insortRight(numbers, 4); // does not compile: cannot guess the item type
+// insortRight<int>(numbers, 4); // does not compile: int is not a Comparable
+
+insort<num>(numbers, 4);  // this works: num is a Comparable
 ```
