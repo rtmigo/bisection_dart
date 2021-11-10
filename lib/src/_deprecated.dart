@@ -1,15 +1,8 @@
 // SPDX-FileCopyrightText: (c) 2019 Artёm IG <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-// the bisect source in Python:
-// https://docs.python.org/3/library/bisect.html
-// https://github.com/python/cpython/blob/3.6/Lib/bisect.py#L24
-
-import '_bisect.dart';
-
-class ItemNotFoundError {
-  //ItemNotFoundError(x): super(x, 'Item not found');
-}
+import '_bisect_left_right.dart';
+import '../beesect.dart';
 
 void insortRight<T>(List<T> a, T x,
     {Comparator<T>? compare, int lo = 0, int? hi}) {
@@ -27,7 +20,25 @@ void insortLeft<T>(List<T> a, T x,
   a.insert(low, x);
 }
 
+
+@Deprecated('Use bisectRight') // since 2021-11
+num bisectRightNum(List<num> A, num x, {int lo = 0, int? hi}) {
+  // изначально здесь был код, имеющий дело с числами и операторами сравнения.
+  // Этот код по-прежнему можно найти в версии 0.0.0 релиза в репозитории (2021-11-10).
+  // Гипотетически он может быть полезен для создания ускоренной оптимизированной версии bisect.
+  return bisectRight(A, x, lo: lo, hi: hi);
+}
+
+@Deprecated('Use bisectLeft') // since 2021-11
+num bisectLeftNum(List<num> A, int x, {int lo = 0, int? hi}) {
+  // изначально здесь был код, имеющий дело с числами и операторами сравнения.
+  // Этот код по-прежнему можно найти в версии 0.0.0 релиза в репозитории (2021-11-10).
+  // Гипотетически он может быть полезен для создания ускоренной оптимизированной версии bisect.
+  return bisectLeft(A, x, lo:lo, hi:hi);
+}
+
 /// Locate the leftmost value exactly equal to [x].
+@Deprecated('Use List extension methods') // since 2021-11
 int? indexOf<T extends Comparable<T>>(List<T> a, T x, {bool dontPanic = false}) {
   final i = bisectLeft<T>(a, x);
   if (i != a.length && a[i].compareTo(x) == 0) {
@@ -42,6 +53,7 @@ int? indexOf<T extends Comparable<T>>(List<T> a, T x, {bool dontPanic = false}) 
 }
 
 /// Locate rightmost value less than [x].
+@Deprecated('Use List extension methods') // since 2021-11
 int? indexOfLT<T extends Comparable<T>>(List<T> a, T x, {bool dontPanic = false}) {
   final i = bisectLeft(a, x);
   if (i != 0) {
@@ -56,6 +68,7 @@ int? indexOfLT<T extends Comparable<T>>(List<T> a, T x, {bool dontPanic = false}
 }
 
 /// Locate rightmost value less than or equal to [x].
+@Deprecated('Use List extension methods') // since 2021-11
 int? indexOfLE<T extends Comparable<T>>(List<T> a, T x, {bool dontPanic = false}) {
   final i = bisectRight(a, x);
   if (i != 0) return i - 1;
@@ -68,6 +81,7 @@ int? indexOfLE<T extends Comparable<T>>(List<T> a, T x, {bool dontPanic = false}
 }
 
 /// Locate leftmost value greater than [x]
+@Deprecated('Use List extension methods') // since 2021-11
 int? indexOfGT<T extends Comparable<T>>(List<T> a, T x, {bool dontPanic = false}) {
   final i = bisectRight(a, x);
   if (i != a.length) return i;
@@ -80,6 +94,7 @@ int? indexOfGT<T extends Comparable<T>>(List<T> a, T x, {bool dontPanic = false}
 }
 
 /// Locate leftmost item greater than or equal to [x]
+@Deprecated('Use List extension methods') // since 2021-11
 int? indexOfGE<T extends Comparable<T>>(List<T> a, T x, {bool dontPanic = false}) {
   final i = bisectLeft(a, x);
   if (i != a.length) return i;
@@ -91,21 +106,25 @@ int? indexOfGE<T extends Comparable<T>>(List<T> a, T x, {bool dontPanic = false}
   }
 }
 
+@Deprecated('Use List extension methods') // since 2021-11
 T? itemLT<T extends Comparable<T>>(List<T> a, T x, {bool dontPanic = false}) {
   final index = indexOfLT(a, x, dontPanic: dontPanic);
   return index == null ? null : a[index];
 }
 
+@Deprecated('Use List extension methods') // since 2021-11
 T? itemLE<T extends Comparable<T>>(List<T> a, T x, {bool dontPanic = false}) {
   final index = indexOfLE(a, x, dontPanic: dontPanic);
   return index == null ? null : a[index];
 }
 
+@Deprecated('Use List extension methods') // since 2021-11
 T? itemGT<T extends Comparable<T>>(List<T> a, T x, {bool dontPanic = false}) {
   final index = indexOfGT(a, x, dontPanic: dontPanic);
   return index == null ? null : a[index];
 }
 
+@Deprecated('Use List extension methods') // since 2021-11
 T? itemGE<T extends Comparable<T>>(List<T> a, T x, {bool dontPanic = false}) {
   final index = indexOfGE(a, x, dontPanic: dontPanic);
   return index == null ? null : a[index];

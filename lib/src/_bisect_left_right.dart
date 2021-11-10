@@ -6,16 +6,12 @@
 
 // The function are rewritten in Dart, comparison operators replaced with Comparator functions
 
-
 /// Compares two items dynamically interpreting them as [Comparable<T>].
 int default_compare<T>(T a, T b) {
   return (a as Comparable<T>).compareTo(b);
 }
 
 int bisectRight<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}) {
-  // original Java code (c) 2016 Profiterole (CC BY-SA 3.0) https://stackoverflow.com/a/39702057
-  // rewritten in Dart, replaced comparison operators with customized comparison functions
-
   // todo test custom compare
   compare ??= default_compare;
 
@@ -47,12 +43,7 @@ int bisectRight<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}
   }
 }
 
-
-
 int bisectLeft<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}) {
-  // original Java code (c) 2016 Profiterole (CC BY-SA 3.0) https://stackoverflow.com/a/39702057
-  // rewritten in Dart, replaced comparison operators with customized comparison functions
-
   // todo test custom compare
   compare ??= default_compare;
 
