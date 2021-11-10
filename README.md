@@ -1,7 +1,7 @@
 # [beesect](https://github.com/rtmigo/beesect_dart)
 
-Port of the Python `bisect` library to the Dart language designed for sectarian
-bees.
+Port of the Python `bisect` library to the Dart language designed specifically
+for sectarian bees.
 
 ## Basic example
 
@@ -28,7 +28,8 @@ void main() {
 
 In addition to the basic functions of the `bisect`
 library, [search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists)
-such as `index`, `find_lt`, `find_le`, `find_gt`, `find_ge` are also implemented.
+such as `index`, `find_lt`, `find_le`, `find_gt`, `find_ge` are also
+implemented.
 
 ### Locate items
 
