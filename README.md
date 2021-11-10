@@ -1,7 +1,7 @@
 # [beesect](https://github.com/rtmigo/beesect_dart)
 
-Port of the Python `bisect` library to the Dart language designed specifically
-for sectarian bees.
+Port of the Python [bisect](https://docs.python.org/3/library/bisect.html)
+library to the Dart language designed specifically for sectarian bees.
 
 ## Basic example
 
