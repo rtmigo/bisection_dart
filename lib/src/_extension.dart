@@ -1,29 +1,29 @@
-import '_bisect.dart' as funcs_b;
+// SPDX-FileCopyrightText: (c) 2021 Artёm IG <github.com/rtmigo>
+// SPDX-License-Identifier: MIT
 
-//import '_bisect.dart';
-import '_derived.dart' as funcs_d;
-import '_derived.dart';
+import '_bisect_left_right.dart' as brl;
+import '_common.dart';
 
 extension SortedListExtension<T> on List<T> {
   int bisectLeft(T item, {Comparator<T>? compare, int low = 0, int? high}) {
-    return funcs_b.bisectLeft(this, item, compare: compare, lo: low, hi: high);
+    return brl.bisectLeft(this, item, compare: compare, lo: low, hi: high);
   }
 
   int bisectRight(T item, {Comparator<T>? compare, int low = 0, int? high}) {
-    return funcs_b.bisectRight(this, item, compare: compare, lo: low, hi: high);
+    return brl.bisectRight(this, item, compare: compare, lo: low, hi: high);
   }
 
   void insortLeft(T item, {Comparator<T>? compare, int low = 0, int? high}) {
-    funcs_d.insortLeft<T>(this, item, compare: compare, lo: low, hi: high);
+    this.insert(this.bisectLeft(item, compare: compare, low: low, high: high), item);
   }
 
   void insortRight(T item, {Comparator<T>? compare, int low = 0, int? high}) {
-    return funcs_d.insortRight(this, item, compare: compare, lo: low, hi: high);
+    this.insert(this.bisectRight(item, compare: compare, low: low, high: high), item);
   }
 
   /// Assuming the list is sorted, locate the leftmost value exactly equal to [x].
   int bisectIndex(T x, {Comparator<T>? compare, int low = 0, int? high}) {
-    compare ??= funcs_b.default_compare;
+    compare ??= brl.default_compare;
     final i = this.bisectLeft(x, compare: compare, low: low, high: high);
     if (i != this.length && compare(this[i], x) == 0) {
       return i;
@@ -82,10 +82,8 @@ extension SortedListExtension<T> on List<T> {
     return this[bisectIndexGT(x, compare: compare, low: low, high: high)];
   }
 
-
   /// Assuming the list is sorted, get leftmost item greater than or equal to [x].
   T bisectValueGE(T x, {Comparator<T>? compare, int low = 0, int? high}) {
     return this[bisectIndexGE(x, compare: compare, low: low, high: high)];
   }
-
 }
