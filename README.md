@@ -1,3 +1,9 @@
+![Generic badge](https://img.shields.io/badge/status-it_works-ok.svg)
+[![Pub Package](https://img.shields.io/pub/v/beesect.svg)](https://pub.dev/packages/beesect)
+[![pub points](https://badges.bar/xrandom/pub%20points)](https://pub.dev/packages/beesect/score)
+![Generic badge](https://img.shields.io/badge/testing_on-Win_|_Linux-blue.svg)
+![Generic badge](https://img.shields.io/badge/testing_on-VM_|_JS-blue.svg)
+
 # [beesect](https://github.com/rtmigo/beesect_dart)
 
 Port of the Python [bisect](https://docs.python.org/3/library/bisect.html)
@@ -17,14 +23,14 @@ void main() {
   var list = ['A', 'B', 'C', 'E'];
 
   // Find the index of an item in a sorted list
-  print(list.bisectLeft('B')); // prints 1
+  print(list.bisectLeft('B'));  // 1
 
   // find the future index for a non-existent item
-  print(list.bisectLeft('D')); // prints 3
+  print(list.bisectLeft('D'));  // 3
 
   // add an item to the list while keeping the list sorted
   list.insortLeft('D');
-  print(list); // [A, B, C, D, E]
+  print(list);  // [A, B, C, D, E]
 }
 ```
 
@@ -42,20 +48,21 @@ void main() {
   // The list must be sorted
   var list = ['A', 'B', 'C', 'D', 'E'];
 
-
   // index of leftmost value exactly equal to 'C'
   print(list.bisectIndex('C')); // 2
 
+
   // index of rightmost item Less than or Equal to 'C'
-  print(list.bisectIndexLE('C')); // 2
+  print(list.bisectIndexLE('C'));  // 2 
 
   // index of rightmost item Less Than 'C'
-  print(list.bisectIndexLT('C')); // 3
+  print(list.bisectIndexLT('C'));  // 1
 
   // index if leftmost item Greater than or Equal to 'C'
-  print(list.bisectIndexGE('C')); // 2
+  print(list.bisectIndexGE('C'));  // 2
 
   // index of leftmost Greater Than 'C'
-  print(list.bisectIndexGT('C')); // 1
+  print(list.bisectIndexGT('C'));  // 3
+}
 }
 ```
