@@ -95,10 +95,10 @@ void main() {
 
   test('get items', () {
     var list = ['B', 'D', 'F'];
-    expect(list.bisectValueLE('D'), 'D');
-    expect(list.bisectValueLT('D'), 'B');
-    expect(list.bisectValueGE('D'), 'D');
-    expect(list.bisectValueGT('D'), 'F');
+    expect(list[list.bisectIndexLE('D')], 'D');
+    expect(list[list.bisectIndexLT('D')], 'B');
+    expect(list[list.bisectIndexGE('D')], 'D');
+    expect(list[list.bisectIndexGT('D')], 'F');
   });
 
 }
