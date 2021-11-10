@@ -1,5 +1,5 @@
 name: beesect
-publish_to: none
+#publish_to: none
 description: Port of the Python bisect library to the Dart language.
 repository: https://github.com/rtmigo/beesect_dart
 
