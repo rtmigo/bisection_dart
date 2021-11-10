@@ -7,7 +7,8 @@
 class ItemNotFoundError extends ArgumentError {}
 
 int bisectRight<T extends Comparable<T>>(List<T> A, T x, {int lo = 0, int? hi}) {
-  // original java code (c) 2016 Profiterole (CC BY-SA 3.0) https://stackoverflow.com/a/39702057
+  // original Java code (c) 2016 Profiterole (CC BY-SA 3.0) https://stackoverflow.com/a/39702057
+  // rewritten to Dart, replaced comparison operators with compareTo
 
   if (lo < 0) throw ArgumentError.value(lo, 'lo');
   hi ??= A.length;
@@ -36,7 +37,8 @@ int bisectRight<T extends Comparable<T>>(List<T> A, T x, {int lo = 0, int? hi}) 
 }
 
 int bisectLeft<T extends Comparable<T>>(List<T> A, T x, {int lo = 0, int? hi}) {
-  // original java code (c) 2016 Profiterole (CC BY-SA 3.0) https://stackoverflow.com/a/39702057
+  // original Java code (c) 2016 Profiterole (CC BY-SA 3.0) https://stackoverflow.com/a/39702057
+  // rewritten to Dart, replaced comparison operators with compareTo
 
   //if (lo == null) lo = 0;
   if (lo < 0) throw ArgumentError.value(lo, 'lo');
