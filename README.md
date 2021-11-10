@@ -28,7 +28,7 @@ void main() {
 
 In addition to the basic functions of the `bisect`
 library, [search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists)
-such as `index`, `find_lt`, `find_le`, `find_gt`, `find_ge` are implemented:
+such as `index`, `find_lt`, `find_le`, `find_gt`, `find_ge` are also implemented.
 
 ### Locate items
 
