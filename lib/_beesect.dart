@@ -2,25 +2,28 @@
 // SPDX-License-Identifier: MIT
 
 // the bisect source in Python:
+// https://docs.python.org/3/library/bisect.html
 // https://github.com/python/cpython/blob/3.6/Lib/bisect.py#L24
 
 class ItemNotFoundError extends ArgumentError {}
 
-int bisectRight<T extends Comparable<T>>(List<T> A, T x, {int lo = 0, int? hi}) {
+int bisectRight<T extends Comparable<T>>(List<T> a, T x, {int lo = 0, int? hi}) {
   // original Java code (c) 2016 Profiterole (CC BY-SA 3.0) https://stackoverflow.com/a/39702057
   // rewritten to Dart, replaced comparison operators with compareTo
 
-  if (lo < 0) throw ArgumentError.value(lo, 'lo');
-  hi ??= A.length;
+  if (lo < 0) {
+    throw ArgumentError.value(lo, 'lo');
+  }
+  hi ??= a.length;
 
-  int N = A.length;
+  int N = a.length;
   if (N == 0) {
     return 0;
   }
-  if (x.compareTo(A[lo]) < 0) {
+  if (x.compareTo(a[lo]) < 0) {
     return lo;
   }
-  if (x.compareTo(A[hi - 1]) > 0) {
+  if (x.compareTo(a[hi - 1]) > 0) {
     return hi;
   }
   for (;;) {
@@ -28,7 +31,7 @@ int bisectRight<T extends Comparable<T>>(List<T> A, T x, {int lo = 0, int? hi}) 
       return lo + 1;
     }
     int mi = (hi! + lo) ~/ 2;
-    if (x.compareTo(A[mi]) < 0) {
+    if (x.compareTo(a[mi]) < 0) {
       hi = mi;
     } else {
       lo = mi;
@@ -36,35 +39,47 @@ int bisectRight<T extends Comparable<T>>(List<T> A, T x, {int lo = 0, int? hi}) 
   }
 }
 
-int bisectLeft<T extends Comparable<T>>(List<T> A, T x, {int lo = 0, int? hi}) {
+int bisectLeft<T extends Comparable<T>>(List<T> a, T x, {int lo = 0, int? hi}) {
   // original Java code (c) 2016 Profiterole (CC BY-SA 3.0) https://stackoverflow.com/a/39702057
   // rewritten to Dart, replaced comparison operators with compareTo
 
   //if (lo == null) lo = 0;
-  if (lo < 0) throw ArgumentError.value(lo, 'lo');
-  hi ??= A.length;
+  if (lo < 0) {
+    throw ArgumentError.value(lo, 'lo');
+  }
+  hi ??= a.length;
 
-  int N = A.length;
+  int N = a.length;
   if (N == 0) {
     return 0;
   }
-  if (x.compareTo(A[lo]) < 0) {
+  if (x.compareTo(a[lo]) < 0) {
     return lo;
   }
-  if (x.compareTo(A[hi - 1]) > 0) {
+  if (x.compareTo(a[hi - 1]) > 0) {
     return hi;
   }
   for (;;) {
     if (lo + 1 == hi) {
-      return x == A[lo] ? lo : (lo + 1);
+      return x == a[lo] ? lo : (lo + 1);
     }
     int mi = (hi! + lo) ~/ 2;
-    if (x.compareTo(A[mi]) <= 0) {
+    if (x.compareTo(a[mi]) <= 0) {
       hi = mi;
     } else {
       lo = mi;
     }
   }
+}
+
+void insortRight<T extends Comparable<T>>(List<T> a, T x, {int lo = 0, int? hi}) {
+  var low = bisectRight<T>(a, x, lo: lo, hi: hi);
+  a.insert(low, x);
+}
+
+void insortLeft<T extends Comparable<T>>(List<T> a, T x, {int lo = 0, int? hi}) {
+  var low = bisectLeft<T>(a, x, lo: lo, hi: hi);
+  a.insert(low, x);
 }
 
 /// Locate the leftmost value exactly equal to [x].
