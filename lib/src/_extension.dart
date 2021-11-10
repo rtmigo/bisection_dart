@@ -1,6 +1,9 @@
 // SPDX-FileCopyrightText: (c) 2021 Artёm IG <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
+// the bisect source in Python:
+// https://github.com/python/cpython/blob/3.6/Lib/bisect.py#L24
+
 import '_bisect_left_right.dart' as brl;
 import '_common.dart';
 
@@ -54,7 +57,7 @@ extension SortedListExtension<T> on List<T> {
     throw ItemNotFoundError();
   }
 
-  /// Assuming the list is sorted, locate leftmost value greater than [x]
+  /// Assuming the list is sorted, locate leftmost value greater than [x].
   int bisectIndexGT(T x, {Comparator<T>? compare, int low = 0, int? high}) {
     final i = this.bisectRight(x, compare: compare, low: low, high: high);
     if (i != this.length) {
@@ -63,7 +66,7 @@ extension SortedListExtension<T> on List<T> {
     throw ItemNotFoundError();
   }
 
-  /// Assuming the list is sorted, locate leftmost item greater than or equal to [x]
+  /// Assuming the list is sorted, locate leftmost item greater than or equal to [x].
   int bisectIndexGE(T x, {Comparator<T>? compare, int low = 0, int? high}) {
     final i = this.bisectLeft(x, compare: compare, low: low, high: high);
     if (i != this.length) {
