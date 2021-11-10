@@ -1,7 +1,7 @@
 ![Generic badge](https://img.shields.io/badge/status-it_works-ok.svg)
 [![Pub Package](https://img.shields.io/pub/v/beesect.svg)](https://pub.dev/packages/beesect)
-[![pub points](https://badges.bar/xrandom/pub%20points)](https://pub.dev/packages/beesect/score)
-![Generic badge](https://img.shields.io/badge/testing_on-Win_|_Linux-blue.svg)
+[![pub points](https://badges.bar/beesect/pub%20points)](https://pub.dev/packages/beesect/score)
+![Generic badge](https://img.shields.io/badge/testing_on-Windows_|_Linux-blue.svg)
 ![Generic badge](https://img.shields.io/badge/testing_on-VM_|_JS-blue.svg)
 
 # [beesect](https://github.com/rtmigo/beesect_dart)
