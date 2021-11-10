@@ -59,5 +59,5 @@ List<int> numbers = [1, 2, 3];
 // insortRight(numbers, 4); // error: int is not a Comparable
 // insortRight<int>(numbers, 4); // error: int is not a Comparable
 
-insort<num>(numbers, 4);  // this works: num is a Comparable
+insortRight<num>(numbers, 4);  // this works: num is a Comparable
 ```
