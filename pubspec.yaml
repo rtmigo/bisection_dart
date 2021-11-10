@@ -3,7 +3,7 @@ name: beesect
 description: Port of the Python bisect library to the Dart language.
 repository: https://github.com/rtmigo/beesect_dart
 
-version: 0.1.0
+version: 0.1.0+1
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
