@@ -130,7 +130,7 @@ jobs:
         run: dart format .
 
       - name: Analyze reformatted
-        run: dart analyze --fatal-infos
+        run: dart analyze lib --fatal-infos
 
       - name: Unit-tests for reformatted code
         run: dart test
