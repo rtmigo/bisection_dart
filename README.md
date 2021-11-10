@@ -47,15 +47,17 @@ void main() {
 
 # Lists of numbers
 
-`beesect` functions work with lists of objects implementing the `Comparable` class.
+`beesect` functions work with lists of objects implementing the `Comparable` 
+class.
 
-Although numbers like int do not implement this class, the problem is easily solved as follows.
+Although numbers like `int` do not implement this, the problem is easily solved 
+by specifying the generic type `num`.
 
 ```dart
 List<int> numbers = [1, 2, 3];
 
-// insortRight(numbers, 4); // does not compile: cannot guess the item type
-// insortRight<int>(numbers, 4); // does not compile: int is not a Comparable
+// insortRight(numbers, 4); // error: int is not a Comparable
+// insortRight<int>(numbers, 4); // error: int is not a Comparable
 
 insort<num>(numbers, 4);  // this works: num is a Comparable
 ```
