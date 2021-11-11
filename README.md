@@ -49,7 +49,7 @@ their values.
 
 Python `bisect` docs    | Dart `bisection`
 ------------------------|--------------------------------------
-`index(list, x)`        | ```dart list[list.bsearch(x)]]```
+`index(list, x)`        | `list[list.bsearch(x)]]`
 `find_lt(list, x)`      | `list[list.bsearchLessThan(x)]`
 `find_le(list, x)`      | `list[list.bsearchLessThanOrEqualTo(x)]`
 `find_gt(list, x)`      | `list[list.bsearchGreaterThan(x)]`
