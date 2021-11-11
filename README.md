@@ -10,12 +10,11 @@ Library for searching in sorted lists and adding items to sorted lists while
 maintaining the order of the items.
 
 Port of the Python [bisect](https://docs.python.org/3/library/bisect.html)
-library to the Dart language. The `bisectLeft` and `bisectRight` functions of
-this library return exactly the same results as `bisect_left`, `bisect_right` in
-Python.
+library to the Dart language. Functions of this library return exactly the same 
+results as the Python functions.
 
-Python `bisect`  | Dart `bisection`
------------------|-------
+Python `bisect`         | Dart `bisection`
+------------------------|--------------------------------------
 `bisect(list, x)`       | `list.bisectRight(x)`
 `bisect_left(list, x)`  | `list.bisectLeft(x)`
 `bisect_right(list, x)` | `list.bisectRight(x)`
@@ -54,8 +53,7 @@ void main() {
 
 In addition to the basic functions of the `bisect` library,
 [search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists)
-such as `index`, `find_lt`, `find_le`, `find_gt`, `find_ge` are also
-implemented.
+are also implemented.
 
 ```dart
 import 'package:bisection/bisection.dart';
