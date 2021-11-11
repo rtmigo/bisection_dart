@@ -5,7 +5,6 @@
 // https://github.com/python/cpython/blob/3.6/Lib/bisect.py#L24
 
 import '_bisect_left_right.dart' as brl;
-import '_common.dart';
 
 extension SortedListExtension<T> on List<T> {
   /// Assuming the list is sorted, locate the insertion point for [item] in a to maintain sorted order.
@@ -40,7 +39,6 @@ extension SortedListExtension<T> on List<T> {
       return i;
     }
     return -1;
-    //throw ItemNotFoundError();
   }
 
   /// Assuming the list is sorted, locate rightmost element less than [x].
@@ -53,8 +51,6 @@ extension SortedListExtension<T> on List<T> {
       return i - 1;
     }
     return -1;
-    //throw ItemNotFoundError();
-
   }
 
   /// Assuming the list is sorted, locate rightmost element less than or equal to [x].
@@ -67,7 +63,6 @@ extension SortedListExtension<T> on List<T> {
       return i - 1;
     }
     return -1;
-    //throw ItemNotFoundError();
   }
 
   /// Assuming the list is sorted, locate leftmost element greater than [x].
@@ -80,7 +75,6 @@ extension SortedListExtension<T> on List<T> {
       return i;
     }
     return -1;
-    //throw ItemNotFoundError();
   }
 
   /// Assuming the list is sorted, locate leftmost item greater than or equal to [x].
@@ -93,7 +87,5 @@ extension SortedListExtension<T> on List<T> {
       return i;
     }
     return -1;
-    //throw ItemNotFoundError();
-
   }
 }
