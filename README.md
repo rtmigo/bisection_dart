@@ -14,6 +14,16 @@ library to the Dart language. The `bisectLeft` and `bisectRight` functions of
 this library return exactly the same results as `bisect_left`, `bisect_right` in
 Python.
 
+Python         | Dart
+---------------|-------
+`bisect`       | `bisectRight`
+`bisect_left`  | `bisectLeft`
+`bisect_right` | `bisectRight`
+`insort`       | `insortRight`
+`insort_left`  | `insortLeft`
+`insort_right` | `insortRight`
+
+
 ## Basic example
 
 ```dart
