@@ -5,6 +5,7 @@
 // https://github.com/python/cpython/blob/3.6/Lib/bisect.py#L24
 
 import '_bisect_left_right.dart' as brl;
+import '_comparator.dart';
 
 extension SortedListExtension<T> on List<T> {
   /// Assuming the list is sorted, locate the insertion point for [item] in a to maintain sorted order.
@@ -33,7 +34,7 @@ extension SortedListExtension<T> on List<T> {
   /// If the element is found, the index of element is returned. If not found, -1
   /// is returned.
   int bsearch(T x, {Comparator<T>? compare, int low = 0, int? high}) {
-    compare ??= brl.default_compare;
+    compare ??= get_comparator();
     final i = this.bisectLeft(x, compare: compare, low: low, high: high);
     if (i != this.length && compare(this[i], x) == 0) {
       return i;
@@ -46,6 +47,12 @@ extension SortedListExtension<T> on List<T> {
   /// If the element is found, the index of element is returned. If not found, -1
   /// is returned.
   int bsearchLessThan(T x, {Comparator<T>? compare, int low = 0, int? high}) {
+
+    // final i = bisectLeft(a, x);
+    // if (i != 0) {
+    //   return i - 1;
+    // }
+
     final i = this.bisectLeft(x, compare: compare, low: low, high: high);
     if (i != 0) {
       return i - 1;
