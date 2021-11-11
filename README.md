@@ -22,6 +22,11 @@ Python         | Dart
 `insort`       | `insortRight`
 `insort_left`  | `insortLeft`
 `insort_right` | `insortRight`
+`index(list, x)`   | 
+`find_lt(list, x)` | `list.bsearchLessThan(x)`
+`find_le(list, x)` | `list.bsearchLessThanOrEqualTo(x)`
+`find_gt(list, x)` | `list.bsearchGreaterThan(x)`
+`find_ge(list, x)` | `list.bsearchGreaterThanOrEqualTo`
 
 
 ## Basic example
