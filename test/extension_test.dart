@@ -44,15 +44,15 @@ void main() {
   test('index of', () {
     var list = ['A', 'C', 'E', 'G'];
     expect(list.bsearch('E'), 2);
-    expect(()=>list.bsearch('F'), throwsA(isA<ItemNotFoundError>()));
+    expect(list.bsearch('F'), -1);
   });
 
   var isNotFound = throwsA(isA<ItemNotFoundError>());
 
   test('rightmost less', () {
     var list = ['B', 'D', 'F'];
-    expect(()=>list.bsearchLessThan('A'), isNotFound);
-    expect(()=>list.bsearchLessThan('B'), isNotFound);
+    expect(list.bsearchLessThan('A'), -1);
+    expect(list.bsearchLessThan('B'), -1);
     expect(list.bsearchLessThan('C'), 0);
     expect(list.bsearchLessThan('D'), 0);
     expect(list.bsearchLessThan('E'), 1);
@@ -62,7 +62,7 @@ void main() {
 
   test('rightmost less equal', () {
     var list = ['B', 'D', 'F'];
-    expect(()=>list.bsearchLessThanOrEqualTo('A'), isNotFound);
+    expect(list.bsearchLessThanOrEqualTo('A'), -1);
     expect(list.bsearchLessThanOrEqualTo('B'), 0);
     expect(list.bsearchLessThanOrEqualTo('C'), 0);
     expect(list.bsearchLessThanOrEqualTo('D'), 1);
@@ -78,8 +78,8 @@ void main() {
     expect(list.bsearchGreaterThan('C'), 1);
     expect(list.bsearchGreaterThan('D'), 2);
     expect(list.bsearchGreaterThan('E'), 2);
-    expect(()=>list.bsearchGreaterThan('F'), isNotFound);
-    expect(()=>list.bsearchGreaterThan('G'), isNotFound);
+    expect(list.bsearchGreaterThan('F'), -1);
+    expect(list.bsearchGreaterThan('G'), -1);
   });
 
   test('index ge: leftmost item greater than or equal to x', () {
@@ -90,11 +90,12 @@ void main() {
     expect(list.bsearchGreaterThanOrEqualTo('D'), 1);
     expect(list.bsearchGreaterThanOrEqualTo('E'), 2);
     expect(list.bsearchGreaterThanOrEqualTo('F'), 2);
-    expect(()=>list.bsearchGreaterThanOrEqualTo('G'), isNotFound);
+    expect(list.bsearchGreaterThanOrEqualTo('G'), -1);
   });
 
   test('get items', () {
     var list = ['B', 'D', 'F'];
+    expect(()=>list[list.bsearchLessThan('B')], throwsRangeError);
     expect(list[list.bsearchLessThanOrEqualTo('D')], 'D');
     expect(list[list.bsearchLessThan('D')], 'B');
     expect(list[list.bsearchGreaterThanOrEqualTo('D')], 'D');
