@@ -14,19 +14,19 @@ library to the Dart language. The `bisectLeft` and `bisectRight` functions of
 this library return exactly the same results as `bisect_left`, `bisect_right` in
 Python.
 
-Python         | Dart
----------------|-------
-`bisect`       | `bisectRight`
-`bisect_left`  | `bisectLeft`
-`bisect_right` | `bisectRight`
-`insort`       | `insortRight`
-`insort_left`  | `insortLeft`
-`insort_right` | `insortRight`
-`index(list, x)`   | 
-`find_lt(list, x)` | `list.bsearchLessThan(x)`
-`find_le(list, x)` | `list.bsearchLessThanOrEqualTo(x)`
-`find_gt(list, x)` | `list.bsearchGreaterThan(x)`
-`find_ge(list, x)` | `list.bsearchGreaterThanOrEqualTo`
+Python `bisect`  | Dart `bisection`
+-----------------|-------
+`bisect(list, x)`       | `list.bisectRight(x)`
+`bisect_left(list, x)`  | `list.bisectLeft(x)`
+`bisect_right(list, x)` | `list.bisectRight(x)`
+`insort(list, x)`       | `list.insortRight(x)`
+`insort_left(list, x)`  | `list.insortLeft(x)`
+`insort_right(list, x)` | `list.insortRight(x)`
+`index(list, x)`        | `list.bsearch(x)`
+`find_lt(list, x)`      | `list.bsearchLessThan(x)`
+`find_le(list, x)`      | `list.bsearchLessThanOrEqualTo(x)`
+`find_gt(list, x)`      | `list.bsearchGreaterThan(x)`
+`find_ge(list, x)`      | `list.bsearchGreaterThanOrEqualTo(x)`
 
 
 ## Basic example
