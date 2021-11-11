@@ -1,4 +1,4 @@
-name: beesect
+name: bisection
 description: Port of the Python bisect library to the Dart language designed
   specifically for sectarian bees.
 repository: https://github.com/rtmigo/beesect_dart
