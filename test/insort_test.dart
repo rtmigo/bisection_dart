@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: (c) 2019 Artёm IG <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-import 'package:beesect/beesect.dart';
+import 'package:bisection/bisection.dart';
 import 'package:test/test.dart';
 
 /// Items will be compared by only the first letter if [str].

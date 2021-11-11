@@ -1,4 +1,4 @@
-import 'package:beesect/beesect.dart';
+import 'package:bisection/bisection.dart';
 
 void main() {
   // The list must be sorted

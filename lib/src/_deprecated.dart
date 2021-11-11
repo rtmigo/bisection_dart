@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 import '_bisect_left_right.dart';
-import '../beesect.dart';
+import '../bisection.dart';
 
 void insortRight<T>(List<T> a, T x,
     {Comparator<T>? compare, int lo = 0, int? hi}) {

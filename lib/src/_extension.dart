@@ -30,7 +30,7 @@ extension SortedListExtension<T> on List<T> {
   }
 
   /// Assuming the list is sorted, locate the leftmost value exactly equal to [x].
-  int bisectIndex(T x, {Comparator<T>? compare, int low = 0, int? high}) {
+  int bsearch(T x, {Comparator<T>? compare, int low = 0, int? high}) {
     compare ??= brl.default_compare;
     final i = this.bisectLeft(x, compare: compare, low: low, high: high);
     if (i != this.length && compare(this[i], x) == 0) {
@@ -40,7 +40,7 @@ extension SortedListExtension<T> on List<T> {
   }
 
   /// Assuming the list is sorted, locate rightmost value less than [x].
-  int bisectIndexLT(T x, {Comparator<T>? compare, int low = 0, int? high}) {
+  int bsearchLessThan(T x, {Comparator<T>? compare, int low = 0, int? high}) {
     final i = this.bisectLeft(x, compare: compare, low: low, high: high);
     if (i != 0) {
       return i - 1;
@@ -49,7 +49,7 @@ extension SortedListExtension<T> on List<T> {
   }
 
   /// Assuming the list is sorted, locate rightmost value less than or equal to [x].
-  int bisectIndexLE(T x, {Comparator<T>? compare, int low = 0, int? high}) {
+  int bsearchLessThanOrEqualTo(T x, {Comparator<T>? compare, int low = 0, int? high}) {
     final i = this.bisectRight(x, compare: compare, low: low, high: high);
     if (i != 0) {
       return i - 1;
@@ -58,7 +58,7 @@ extension SortedListExtension<T> on List<T> {
   }
 
   /// Assuming the list is sorted, locate leftmost value greater than [x].
-  int bisectIndexGT(T x, {Comparator<T>? compare, int low = 0, int? high}) {
+  int bsearchGreaterThan(T x, {Comparator<T>? compare, int low = 0, int? high}) {
     final i = this.bisectRight(x, compare: compare, low: low, high: high);
     if (i != this.length) {
       return i;
@@ -67,7 +67,7 @@ extension SortedListExtension<T> on List<T> {
   }
 
   /// Assuming the list is sorted, locate leftmost item greater than or equal to [x].
-  int bisectIndexGE(T x, {Comparator<T>? compare, int low = 0, int? high}) {
+  int bsearchGreaterThanOrEqualTo(T x, {Comparator<T>? compare, int low = 0, int? high}) {
     final i = this.bisectLeft(x, compare: compare, low: low, high: high);
     if (i != this.length) {
       return i;
