@@ -13,6 +13,7 @@ Port of the Python [bisect](https://docs.python.org/3/library/bisect.html)
 library to the Dart language. Extension methods of this library return exactly
 the same results as the Python functions.
 
+
 Python `bisect`         | Dart `bisection`
 ------------------------|--------------------------------------
 `bisect(list, x)`       | `list.bisectRight(x)`
@@ -21,19 +22,6 @@ Python `bisect`         | Dart `bisection`
 `insort(list, x)`       | `list.insortRight(x)`
 `insort_left(list, x)`  | `list.insortLeft(x)`
 `insort_right(list, x)` | `list.insortRight(x)`
-
-The [search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists)
-from the Python bisect documentation are implemented somewhat differently. They find
-the same elements, but return the indexes of the elements instead of their
-values.
-
-Python `bisect` docs    | Dart `bisection`
-------------------------|--------------------------------------
-`index(list, x)`        | `list[list.bsearch(x)]]`
-`find_lt(list, x)`      | `list[list.bsearchLessThan(x)]`
-`find_le(list, x)`      | `list[list.bsearchLessThanOrEqualTo(x)]`
-`find_gt(list, x)`      | `list[list.bsearchGreaterThan(x)]`
-`find_ge(list, x)`      | `list[list.bsearchGreaterThanOrEqualTo(x)]`
 
 ## Basic example
 
@@ -61,6 +49,17 @@ void main() {
 In addition to the basic functions of the `bisect` library,
 [search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists)
 are also implemented.
+
+They find the same elements, but return the indexes of the elements instead of
+their values.
+
+Python `bisect` docs    | Dart `bisection`
+------------------------|--------------------------------------
+`index(list, x)`        | `list[list.bsearch(x)]]`
+`find_lt(list, x)`      | `list[list.bsearchLessThan(x)]`
+`find_le(list, x)`      | `list[list.bsearchLessThanOrEqualTo(x)]`
+`find_gt(list, x)`      | `list[list.bsearchGreaterThan(x)]`
+`find_ge(list, x)`      | `list[list.bsearchGreaterThanOrEqualTo(x)]`
 
 ```dart
 import 'package:bisection/bisection.dart';
