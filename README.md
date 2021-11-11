@@ -23,7 +23,7 @@ Python `bisect`         | Dart `bisection`
 `insort_right(list, x)` | `list.insortRight(x)`
 
 The [search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists)
-from the bisect documentation are implemented somewhat differently. They find
+from the Python bisect documentation are implemented somewhat differently. They find
 the same elements, but return the indexes of the elements instead of their
 values.
 
