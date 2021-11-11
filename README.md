@@ -6,8 +6,8 @@
 
 # [bisection](https://github.com/rtmigo/bisection_dart)
 
-Library for searching in sorted lists and adding items to sorted lists while
-maintaining the order of the items.
+Library for searching in sorted lists and adding elements to sorted lists while
+maintaining the order of the elements.
 
 Port of the Python [bisect](https://docs.python.org/3/library/bisect.html)
 library to the Dart language. Extension methods of this library return exactly
@@ -44,13 +44,13 @@ void main() {
   // The list must be sorted
   var list = ['A', 'B', 'C', 'E'];
 
-  // Find the index of an item in a sorted list
+  // Find the index of an element in a sorted list
   print(list.bisectLeft('B')); // 1
 
-  // find the future index for a non-existent item
+  // find the future index for a non-existent element
   print(list.bisectLeft('D')); // 3
 
-  // add an item to the list while keeping the list sorted
+  // add an element to the list while keeping the list sorted
   list.insortLeft('D');
   print(list); // [A, B, C, D, E]
 }
@@ -73,13 +73,13 @@ void main() {
   print(list.bsearch('C')); // 2
 
 
-  // index of rightmost item less than or equal to 'C'
+  // index of rightmost element less than or equal to 'C'
   print(list.bsearchLessThanOrEqualTo('C')); // 2
 
-  // index of rightmost item less than 'C'
+  // index of rightmost element less than 'C'
   print(list.bsearchLessThan('C')); // 1
 
-  // index if leftmost item greater than or equal to 'C'
+  // index if leftmost element greater than or equal to 'C'
   print(list.bsearchGreaterThanOrEqualTo('C')); // 2
 
   // index of leftmost greater than 'C'
