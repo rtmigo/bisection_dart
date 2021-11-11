@@ -3,7 +3,7 @@ description: Port of the Python bisect library to the Dart language designed
   specifically for sectarian bees.
 repository: https://github.com/rtmigo/beesect_dart
 
-version: 0.1.0+3
+version: 0.1.0+4
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
