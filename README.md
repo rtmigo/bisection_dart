@@ -4,7 +4,7 @@
 ![Generic badge](https://img.shields.io/badge/testing_on-Windows_|_Linux-blue.svg)
 ![Generic badge](https://img.shields.io/badge/testing_on-VM_|_JS-blue.svg)
 
-# [bisection](https://github.com/rtmigo/beesect_dart)
+# [bisection](https://github.com/rtmigo/bisection_dart)
 
 Library for searching in sorted lists and adding items to sorted lists while
 maintaining the order of the items.
