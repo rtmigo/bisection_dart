@@ -36,8 +36,8 @@ void main() {
 
 ## Searching in sorted lists
 
-In addition to the basic functions of the `bisect`
-library, [search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists)
+In addition to the basic functions of the `bisect` library, 
+[search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists)
 such as `index`, `find_lt`, `find_le`, `find_gt`, `find_ge` are also
 implemented.
 
@@ -63,6 +63,5 @@ void main() {
 
   // index of leftmost Greater Than 'C'
   print(list.bisectIndexGT('C'));  // 3
-}
 }
 ```
