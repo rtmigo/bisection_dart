@@ -7,6 +7,11 @@ Port of the Python [bisect](https://docs.python.org/3/library/bisect.html)
 library to the Dart language. Extension methods of this library return exactly
 the same results as the Python functions.
 
+The consistency of the results in Python and Dart was verified by automatically
+generated unit tests. The Dart code of unit tests was generated in Python 3.9
+along with the correct expected values.
+
+
 Python `bisect`         | Dart `bisection`
 ------------------------|--------------------------------------
 `bisect(arr, x)`       | `arr.bisectRight(x)`
@@ -44,8 +49,8 @@ In addition to the basic functions of the `bisect` library,
 are also implemented.
 
 In both Dart and Python, these functions find the same elements. However, in
-`bisection`, the indexes of the elements are returned, not their values. This is
-done for more flexibility.
+`bisection`, the indexes of the elements are returned, not their values. This
+gives a more flexibility.
 
 Python `bisect` docs   | Dart `bisection`
 -----------------------|--------------------------------------
