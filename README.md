@@ -10,8 +10,8 @@ Library for searching in sorted lists and adding items to sorted lists while
 maintaining the order of the items.
 
 Port of the Python [bisect](https://docs.python.org/3/library/bisect.html)
-library to the Dart language. Functions of this library return exactly the same 
-results as the Python functions.
+library to the Dart language. Extension methods of this library return exactly
+the same results as the Python functions.
 
 Python `bisect`         | Dart `bisection`
 ------------------------|--------------------------------------
@@ -21,12 +21,19 @@ Python `bisect`         | Dart `bisection`
 `insort(list, x)`       | `list.insortRight(x)`
 `insort_left(list, x)`  | `list.insortLeft(x)`
 `insort_right(list, x)` | `list.insortRight(x)`
-`index(list, x)`        | `list.bsearch(x)`
-`find_lt(list, x)`      | `list.bsearchLessThan(x)`
-`find_le(list, x)`      | `list.bsearchLessThanOrEqualTo(x)`
-`find_gt(list, x)`      | `list.bsearchGreaterThan(x)`
-`find_ge(list, x)`      | `list.bsearchGreaterThanOrEqualTo(x)`
 
+The [search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists)
+from the bisect documentation are implemented somewhat differently. They find
+the same elements, but return the indexes of the elements instead of their
+values.
+
+Python `bisect` docs    | Dart `bisection`
+------------------------|--------------------------------------
+`index(list, x)`        | `list[list.bsearch(x)]]`
+`find_lt(list, x)`      | `list[list.bsearchLessThan(x)]`
+`find_le(list, x)`      | `list[list.bsearchLessThanOrEqualTo(x)]`
+`find_gt(list, x)`      | `list[list.bsearchGreaterThan(x)]`
+`find_ge(list, x)`      | `list[list.bsearchGreaterThanOrEqualTo(x)]`
 
 ## Basic example
 
@@ -78,5 +85,4 @@ void main() {
   // index of leftmost greater than 'C'
   print(list.bsearchGreaterThan('C')); // 3
 }
-
 ```

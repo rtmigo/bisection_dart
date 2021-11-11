@@ -29,49 +29,71 @@ extension SortedListExtension<T> on List<T> {
     this.insert(this.bisectRight(item, compare: compare, low: low, high: high), item);
   }
 
-  /// Assuming the list is sorted, locate the leftmost value exactly equal to [x].
+  /// Assuming the list is sorted, locate the leftmost element exactly equal to [x].
+  ///
+  /// If the element is found, the index of element is returned. If not found, -1
+  /// is returned.
   int bsearch(T x, {Comparator<T>? compare, int low = 0, int? high}) {
     compare ??= brl.default_compare;
     final i = this.bisectLeft(x, compare: compare, low: low, high: high);
     if (i != this.length && compare(this[i], x) == 0) {
       return i;
     }
-    throw ItemNotFoundError();
+    return -1;
+    //throw ItemNotFoundError();
   }
 
-  /// Assuming the list is sorted, locate rightmost value less than [x].
+  /// Assuming the list is sorted, locate rightmost element less than [x].
+  ///
+  /// If the element is found, the index of element is returned. If not found, -1
+  /// is returned.
   int bsearchLessThan(T x, {Comparator<T>? compare, int low = 0, int? high}) {
     final i = this.bisectLeft(x, compare: compare, low: low, high: high);
     if (i != 0) {
       return i - 1;
     }
-    throw ItemNotFoundError();
+    return -1;
+    //throw ItemNotFoundError();
+
   }
 
-  /// Assuming the list is sorted, locate rightmost value less than or equal to [x].
+  /// Assuming the list is sorted, locate rightmost element less than or equal to [x].
+  ///
+  /// If the element is found, the index of element is returned. If not found, -1
+  /// is returned.
   int bsearchLessThanOrEqualTo(T x, {Comparator<T>? compare, int low = 0, int? high}) {
     final i = this.bisectRight(x, compare: compare, low: low, high: high);
     if (i != 0) {
       return i - 1;
     }
-    throw ItemNotFoundError();
+    return -1;
+    //throw ItemNotFoundError();
   }
 
-  /// Assuming the list is sorted, locate leftmost value greater than [x].
+  /// Assuming the list is sorted, locate leftmost element greater than [x].
+  ///
+  /// If the element is found, the index of element is returned. If not found, -1
+  /// is returned.
   int bsearchGreaterThan(T x, {Comparator<T>? compare, int low = 0, int? high}) {
     final i = this.bisectRight(x, compare: compare, low: low, high: high);
     if (i != this.length) {
       return i;
     }
-    throw ItemNotFoundError();
+    return -1;
+    //throw ItemNotFoundError();
   }
 
   /// Assuming the list is sorted, locate leftmost item greater than or equal to [x].
+  ///
+  /// If the element is found, the index of element is returned. If not found, -1
+  /// is returned.
   int bsearchGreaterThanOrEqualTo(T x, {Comparator<T>? compare, int low = 0, int? high}) {
     final i = this.bisectLeft(x, compare: compare, low: low, high: high);
     if (i != this.length) {
       return i;
     }
-    throw ItemNotFoundError();
+    return -1;
+    //throw ItemNotFoundError();
+
   }
 }
