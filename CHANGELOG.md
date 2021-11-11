@@ -1,4 +1,4 @@
-# 0.1.0+4
+# 0.2.0
 
 - The first version to be published on pub.dev
 
