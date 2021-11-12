@@ -1,72 +1,61 @@
 // SPDX-FileCopyrightText: (c) 2019 Artёm IG <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-// `bisectLeft` and `bisectRight` rewritted from a Java port (https://stackoverflow.com/a/39702057)
-// SPDX-FileCopyrightText: (c) 2016 Profiterole (CC BY-SA 3.0)
-
-// The functions are rewritten in Dart, comparison operators replaced with Comparator functions
+// the bisect source in Python:
+// https://github.com/python/cpython/blob/3.6/Lib/bisect.py#L24
+// https://github.com/python/cpython/blob/3.9/Lib/bisect.py#L24
 
 import '_comparator.dart';
 
-int bisectRight<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}) {
+int bisect_right<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}) {
   compare ??= get_comparator<T>();
 
   if (lo < 0) {
-    throw ArgumentError.value(lo, 'lo');
+    throw ArgumentError.value(lo, 'lo must be non-negative'); // in Python this disallowed too
   }
-  hi ??= a.length;
+  if (hi!=null && hi<0) {
+    // Python allows negative hi values, but returns strange results.
+    // I failed to make a Dart code that returns the same, in particular in the case of hi=-1.
+    // In any case, negative hi does not make sense
+    throw ArgumentError.value(lo, 'hi must be non-negative');
+  }
 
-  int N = a.length;
-  if (N == 0) {
-    return 0;
-  }
-  if (compare(x, a[lo]) < 0) {
-    return lo;
-  }
-  if (compare(x, a[hi - 1]) > 0) {
-    return hi;
-  }
-  for (;;) {
-    if (lo + 1 == hi) {
-      return lo + 1;
-    }
-    int mi = (hi! + lo) ~/ 2;
-    if (compare(x, a[mi]) < 0) {
-      hi = mi;
+  int h = hi ?? a.length;
+
+  while (lo < h) {
+    var mid = (lo + h) >> 1; // in Python it's `//2`
+    if (compare(x, a[mid]) < 0) {
+      h = mid;
     } else {
-      lo = mi;
+      lo = mid + 1;
     }
   }
+
+  return lo;
 }
 
-int bisectLeft<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}) {
+int bisect_left<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}) {
   compare ??= get_comparator<T>();
 
-  //if (lo == null) lo = 0;
   if (lo < 0) {
-    throw ArgumentError.value(lo, 'lo');
+    throw ArgumentError.value(lo, 'lo must be non-negative'); // in Python this disallowed too
   }
-  hi ??= a.length;
+  if (hi!=null && hi<0) {
+    // Python allows negative hi values, but returns strange results.
+    // I failed to make a Dart code that returns the same, in particular in the case of hi=-1.
+    // In any case, negative hi does not make sense
+    throw ArgumentError.value(lo, 'hi must be non-negative');
+  }
 
-  int N = a.length;
-  if (N == 0) {
-    return 0;
-  }
-  if (compare(x, a[lo]) < 0) {
-    return lo;
-  }
-  if (compare(x, a[hi - 1]) > 0) {
-    return hi;
-  }
-  for (;;) {
-    if (lo + 1 == hi) {
-      return x == a[lo] ? lo : (lo + 1);
-    }
-    int mi = (hi! + lo) ~/ 2;
-    if (compare(x, a[mi]) <= 0) {
-      hi = mi;
+  int h = hi ?? a.length;
+
+  while (lo < h) {
+    int mid = (lo + h) >> 1; // in Python it's `//2`
+    if (compare(a[mid], x) < 0) {
+      lo = mid + 1;
     } else {
-      lo = mi;
+      h = mid;
     }
   }
+  return lo;
 }
