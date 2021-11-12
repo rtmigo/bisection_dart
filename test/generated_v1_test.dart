@@ -28,7 +28,7 @@ void main() {
 
   test('bisect_right_comparable', () {
     //int
-    checkBSR((lst, x) => bisectRight<num>(lst, x));
+    checkBSR((lst, x) => bisect_right<num>(lst, x));
   });
 
   void checkBSL(bsl) {
@@ -53,7 +53,7 @@ void main() {
   });
 
   test('bisect_left_comparable', () {
-    checkBSL((lst, x) => bisectLeft<num>(lst, x));
+    checkBSL((lst, x) => bisect_left<num>(lst, x));
   });
 
   test('index', () {

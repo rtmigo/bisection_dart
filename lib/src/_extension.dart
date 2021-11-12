@@ -4,19 +4,19 @@
 // the bisect source in Python:
 // https://github.com/python/cpython/blob/3.6/Lib/bisect.py#L24
 
-import '_bisect_left_right.dart' as brl;
+import '_bisect_left_right.dart' as funcs;
 import '_comparator.dart';
 
 extension SortedListExtension<T> on List<T> {
   /// Assuming the list is sorted, locate the insertion point for [item] in a to maintain sorted order.
   int bisectLeft(T item, {Comparator<T>? compare, int low = 0, int? high}) {
-    return brl.bisectLeft(this, item, compare: compare, lo: low, hi: high);
+    return funcs.bisect_left(this, item, compare: compare, lo: low, hi: high);
   }
 
   /// Similar to [bisectLeft], but returns an insertion point which comes after (to the right of)
   /// any existing entries of [item] in the list.
   int bisectRight(T item, {Comparator<T>? compare, int low = 0, int? high}) {
-    return brl.bisectRight(this, item, compare: compare, lo: low, hi: high);
+    return funcs.bisect_right(this, item, compare: compare, lo: low, hi: high);
   }
 
   /// Assuming the list is sorted, insert [item] in list in sorted order.
