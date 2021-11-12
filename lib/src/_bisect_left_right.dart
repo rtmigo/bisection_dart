@@ -14,9 +14,9 @@ int bisect_right<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi
     throw ArgumentError.value(lo, 'lo must be non-negative'); // in Python this disallowed too
   }
   if (hi!=null && hi<0) {
-    // Python allows negative hi values, but returns strange results.
-    // I failed to make a Dart code that returns the same, in particular in the case of hi=-1.
-    // In any case, negative hi does not make sense
+    // Python allows negative `hi` values, but returns strange results.
+    // I failed to make a Dart code that returns the same, in particular in the case of `hi=-1`.
+    // But negative `hi` does not make sense. So we'll just disallow it
     throw ArgumentError.value(lo, 'hi must be non-negative');
   }
 
@@ -41,9 +41,9 @@ int bisect_left<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}
     throw ArgumentError.value(lo, 'lo must be non-negative'); // in Python this disallowed too
   }
   if (hi!=null && hi<0) {
-    // Python allows negative hi values, but returns strange results.
-    // I failed to make a Dart code that returns the same, in particular in the case of hi=-1.
-    // In any case, negative hi does not make sense
+    // Python allows negative `hi` values, but returns strange results.
+    // I failed to make a Dart code that returns the same, in particular in the case of `hi=-1`.
+    // But negative `hi` does not make sense. So we'll just disallow it
     throw ArgumentError.value(lo, 'hi must be non-negative');
   }
 
