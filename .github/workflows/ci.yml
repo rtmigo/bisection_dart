@@ -41,8 +41,9 @@ jobs:
       #      - name: VM tests
       #        run: dart test
 
+      #  && matrix.platform=='chrome'
       - name: Tests
-        if: !(matrix.os=='windows-latest' && matrix.platform=='chrome')
+        if: matrix.os!='windows-latest'
         run: dart test --platform ${{ matrix.platform }} --timeout=60s
 
 
