@@ -60,7 +60,7 @@ int bisect_left<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}
   return lo;
 }
 
-final bisect = bisect_right;
+
 
 /// Assuming the list is sorted, insert [item] in list in sorted order.
 void insort_left<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}) {
@@ -117,3 +117,6 @@ T find_ge<T>(List<T> a, T x, {Comparator<T>? compare}) {
   }
   throw ArgumentError('Value not found');
 }
+
+const bisect = bisect_right;
+const insort = insort_right;

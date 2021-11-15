@@ -9,6 +9,6 @@ linter:
     unnecessary_this: false
     await_only_futures: true
 
-analyzer:
-   exclude:
-    - example/**
+#analyzer:
+#   exclude:
+#    - example/**

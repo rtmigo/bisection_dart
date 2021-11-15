@@ -3,24 +3,77 @@
 Library for searching in sorted lists and adding elements to sorted lists while
 maintaining the order of the elements.
 
-Port of the Python [bisect](https://docs.python.org/3/library/bisect.html)
-library to the Dart language. Extension methods of this library return exactly
-the same results as the Python functions.
+Port of the Python [bisect](https://docs.python.org/3/library/bisect.html) with
+[search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists).
 
-The consistency of the results in Python and Dart was verified
-by [Dart unit tests](https://github.com/rtmigo/bisection_dart/blob/staging/test/generated_v2_test.dart)
-, generated
-by [Python scripts](https://github.com/rtmigo/bisection_dart/blob/staging/test/generators/bisect_test_generator_v2.py)
-.
+## Use bisect functions
 
-Python `bisect`         | Dart `bisection`
-------------------------|--------------------------------------
+```dart
+import 'package:bisection/bisect.dart';
+
+void main() {
+  // The list must be sorted
+  final arr = ['A', 'B', 'C', 'E'];
+
+  // Find the index of an item in a sorted list
+  print(bisect(arr, 'B'));  // 2
+
+  // Find the future index for a non-existent item
+  print(bisect_left(arr, 'D'));  // 3
+
+  // Add an item to the list while keeping the list sorted
+  insort(arr, 'D');
+  print(arr);  // [A, B, C, D, E]
+
+  // Find leftmost value greater than 'B'
+  print(find_gt(arr, 'B'));  // C
+}
+```
+
+## Use list extensions
+
+```dart
+import 'package:bisection/extension.dart';
+
+void main() {
+  // The list must be sorted
+  final arr = ['A', 'B', 'C', 'E'];
+
+  // Find the index of an item in a sorted list
+  print(arr.bisectRight('B'));  // 2
+
+  // Find the future index for a non-existent item
+  print(arr.bisectLeft('D'));  // 3
+
+  // Add an item to the list while keeping the list sorted
+  arr.insortLeft('D');
+  print(arr);  // [A, B, C, D, E]
+
+  // Locate leftmost value greater than 'B'
+  print(arr.bsearchGreaterThan('B'));  // 2
+}
+```
+
+Python `bisect` docs   | Dart `bisection` extension methods
+-----------------------|--------------------------------------
 `bisect(arr, x)`       | `arr.bisectRight(x)`
 `bisect_left(arr, x)`  | `arr.bisectLeft(x)`
 `bisect_right(arr, x)` | `arr.bisectRight(x)`
 `insort(arr, x)`       | `arr.insortRight(x)`
 `insort_left(arr, x)`  | `arr.insortLeft(x)`
 `insort_right(arr, x)` | `arr.insortRight(x)`
+`index(arr, x)`        | `arr[arr.bsearch(x)]]`
+`find_lt(arr, x)`      | `arr[arr.bsearchLessThan(x)]`
+`find_le(arr, x)`      | `arr[arr.bsearchLessThanOrEqualTo(x)]`
+`find_gt(arr, x)`      | `arr[arr.bsearchGreaterThan(x)]`
+`find_ge(arr, x)`      | `arr[arr.bsearchGreaterThanOrEqualTo(x)]`
+
+
+
+
+
+Python `bisect`         | Dart `bisection`
+------------------------|--------------------------------------
 
 ## Basic example
 
@@ -53,13 +106,6 @@ In both Dart and Python, these functions find the same elements. However, in
 `bisection`, the indexes of the elements are returned, not their values. This
 gives a more flexibility.
 
-Python `bisect` docs   | Dart `bisection`
------------------------|--------------------------------------
-`index(arr, x)`        | `arr[arr.bsearch(x)]]`
-`find_lt(arr, x)`      | `arr[arr.bsearchLessThan(x)]`
-`find_le(arr, x)`      | `arr[arr.bsearchLessThanOrEqualTo(x)]`
-`find_gt(arr, x)`      | `arr[arr.bsearchGreaterThan(x)]`
-`find_ge(arr, x)`      | `arr[arr.bsearchGreaterThanOrEqualTo(x)]`
 
 ```dart
 import 'package:bisection/bisection.dart';
@@ -87,6 +133,13 @@ void main() {
 ```
 
 ## Differences from Python bisect
+
+The consistency of the results in Python and Dart was verified
+by [Dart unit tests](https://github.com/rtmigo/bisection_dart/blob/staging/test/generated_v2_test.dart)
+, generated
+by [Python scripts](https://github.com/rtmigo/bisection_dart/blob/staging/test/generators/bisect_test_generator_v2.py)
+.
+
 
 The `bisect_left` and `bisect_right` in Python allows you to set strange
 arguments. For example, `lo` may be far beyond the right boundary of the array,
