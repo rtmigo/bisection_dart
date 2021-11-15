@@ -7,10 +7,11 @@ Port of the Python [bisect](https://docs.python.org/3/library/bisect.html)
 library to the Dart language. Extension methods of this library return exactly
 the same results as the Python functions.
 
-The consistency of the results in Python and Dart was verified by automatically
-generated unit tests. The Dart code of unit tests was generated in Python 3.9
-along with the correct expected values.
-
+The consistency of the results in Python and Dart was verified
+by [Dart unit tests](https://github.com/rtmigo/bisection_dart/blob/staging/test/generated_v2_test.dart)
+, generated
+by [Python scripts](https://github.com/rtmigo/bisection_dart/blob/staging/test/generators/bisect_test_generator_v2.py)
+.
 
 Python `bisect`         | Dart `bisection`
 ------------------------|--------------------------------------
@@ -84,3 +85,12 @@ void main() {
   print(arr.bsearchGreaterThan('C')); // 3
 }
 ```
+
+## Differences from Python bisect
+
+The `bisect_left` and `bisect_right` in Python allows you to set strange
+arguments. For example, `lo` may be far beyond the right boundary of the array,
+and `hi` may be negative.
+
+This Dart implementation does not allow negative `hi` values. An exception will be
+thrown when trying to pass such a value.
