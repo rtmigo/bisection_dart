@@ -30,7 +30,7 @@ jobs:
 
         exclude:
           # 'chrome' platform timeouts for some reason
-          - os: windows
+          - os: windows-latest
             platform: chrome
         # 'chrome' platform timeouts for some reason
         #sdk: [stable, beta, dev, 2.12.0-29.10.beta]
