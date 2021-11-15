@@ -28,7 +28,9 @@ jobs:
         platform: [node, vm, chrome]
         # 'chrome' platform timeouts for some reason
         #sdk: [stable, beta, dev, 2.12.0-29.10.beta]
+    if: (!(matrix.os=='windows-latest' && matrix.platform=='chrome'))
     steps:
+
       - uses: actions/checkout@v2
       #      - uses: actions/setup-node@v2
       - uses: dart-lang/setup-dart@v1
@@ -43,7 +45,7 @@ jobs:
 
       #
       - name: Tests
-        if: (!(matrix.os=='windows-latest' && matrix.platform=='chrome'))
+
         run: dart test --platform ${{ matrix.platform }} --timeout=60s
 
 
