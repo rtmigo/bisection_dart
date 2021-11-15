@@ -19,6 +19,7 @@ on:
 
 jobs:
   test:
+
     timeout-minutes: 9
     runs-on: ${{ matrix.os }}
     strategy:
@@ -26,8 +27,17 @@ jobs:
         os: [ubuntu-latest, windows-latest] # [ubuntu-latest, macos-latest, windows-latest]
         sdk: [2.12.0, latest] # dart is null-safe since 2.12 2.14.0
         platform: [node, vm, chrome]
+
+        exclude:
+          # 'chrome' platform timeouts for some reason
+          - os: windows-latest
+            platform: chrome
+        # 'chrome' platform timeouts for some reason
         #sdk: [stable, beta, dev, 2.12.0-29.10.beta]
+      #if: (!(matrix.os=='windows-latest' && matrix.platform=='chrome'))
+
     steps:
+
       - uses: actions/checkout@v2
       #      - uses: actions/setup-node@v2
       - uses: dart-lang/setup-dart@v1
@@ -40,8 +50,10 @@ jobs:
       #      - name: VM tests
       #        run: dart test
 
+      #
       - name: Tests
-        run: dart test --platform ${{ matrix.platform }}
+
+        run: dart test --platform ${{ matrix.platform }} --timeout=60s
 
 
   analyze:

@@ -4,8 +4,8 @@
 // the bisect source in Python:
 // https://github.com/python/cpython/blob/3.6/Lib/bisect.py#L24
 
-import '_bisect_left_right.dart' as funcs;
-import '_comparator.dart';
+import 'bisect.dart' as funcs;
+import 'src/_comparator.dart';
 
 extension SortedListExtension<T> on List<T> {
   /// Assuming the list is sorted, locate the insertion point for [item] in a to maintain sorted order.
@@ -88,8 +88,8 @@ extension SortedListExtension<T> on List<T> {
   ///
   /// If the element is found, the index of element is returned. If not found, -1
   /// is returned.
-  int bsearchGreaterThanOrEqualTo(T x, {Comparator<T>? compare, int low = 0, int? high}) {
-    final i = this.bisectLeft(x, compare: compare, low: low, high: high);
+  int bsearchGreaterThanOrEqualTo(T x, {Comparator<T>? compare}) {
+    final i = this.bisectLeft(x, compare: compare);
     if (i != this.length) {
       return i;
     }

@@ -6,5 +6,7 @@ set -e && cd "${0%/*}"
 # the second one. This is not a big problem, since the first generator
 # essentially makes test for deprecated functions.
 
-python3 bisect_test_generator_v2.py > ../generated_v2_test.dart
+#FILE='../generated/generated_v3_test.dart'
+python3 bisect_test_generator_v3.py #> $FILE
+dart format ../generated/*.dart
 echo "done!"

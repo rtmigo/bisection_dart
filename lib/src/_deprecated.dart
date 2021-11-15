@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 import '../bisection.dart';
-import '_bisect_left_right.dart';
+import '../bisect.dart';
 
 class ItemNotFoundError implements Exception {}
 
