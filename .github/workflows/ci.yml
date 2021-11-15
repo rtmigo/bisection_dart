@@ -42,7 +42,7 @@ jobs:
       #        run: dart test
 
       - name: Tests
-        if: !(matrix.os=='windows-latest' && platform=='chrome')
+        if: !(matrix.os=='windows-latest' && matrix.platform=='chrome')
         run: dart test --platform ${{ matrix.platform }} --timeout=60s
 
 
