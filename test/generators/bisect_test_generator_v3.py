@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 import datetime
+import shutil
 from bisect import bisect_right, bisect_left, bisect
 from pathlib import Path
 from typing import Optional, Callable
@@ -13,6 +14,7 @@ named_arrays = {
     'D': [3, 4, 5],
     'E': [0, 1, 2, 2, 2, 2, 3, 3, 5, 6]
 }
+
 
 def index(a, x, lo, hi):
     'Locate the leftmost value exactly equal to x'
@@ -54,12 +56,13 @@ def find_ge(a, x):
     raise ValueError
 
 
-
+generated_tests_dir = Path(__file__).parent.parent / "generated"
 
 class TestFile:
     def __init__(self, name: str):
         self.name = name
-        self.path = Path(__file__).parent.parent/"generated"/(name+".dart")
+        self.path = Path(__file__).parent.parent / "generated" / (
+                    name.replace('.', '_') + "_test.dart")
 
     def __enter__(self):
         self.file = self.path.open("wt")
@@ -81,6 +84,7 @@ class TestFile:
         self.file.write("}")
         self.file.flush()
         self.file.close()
+
 
 class NamedTest:
     def __init__(self, file: TestFile, name: str):
@@ -105,7 +109,8 @@ def dart_call(object_name: Optional[str],
     result.append('(')
 
     dargs = [", ".join(str(a) for a in args),
-             ", ".join(str(k) + ':' + str(a) for (k, a) in kwargs.items() if a is not None)]
+             ", ".join(str(k) + ':' + str(a) for (k, a) in kwargs.items() if
+                       a is not None)]
     dargs = [a for a in dargs if a]
 
     result.append(", ".join(dargs))
@@ -115,15 +120,20 @@ def dart_call(object_name: Optional[str],
 
 if __name__ == "__main__":
 
+    shutil.rmtree(str(generated_tests_dir))
+    generated_tests_dir.mkdir()
+
     def gen_one(outfile: TestFile,
                 test_name, gen_dart_call: Callable, python_func, hi, lo,
                 wrap_dart_call: Callable = None):
         for arr_name in named_arrays.keys():
-            with NamedTest(outfile, f"{test_name} for {arr_name} lo={lo} hi={hi}"):
+            with NamedTest(outfile,
+                           f"{test_name} for {arr_name} lo={lo} hi={hi}"):
                 for x in range(-2, 9):
                     dart_call_code = gen_dart_call(arr_name, x, lo, hi)
                     if wrap_dart_call:
-                        dart_call_code = wrap_dart_call(dart_call_code, arr_name)
+                        dart_call_code = wrap_dart_call(dart_call_code,
+                                                        arr_name)
                     dart_prefix = ''
                     try:
                         python_result = python_func(arr_name, x, lo, hi)
@@ -145,8 +155,10 @@ if __name__ == "__main__":
         hi_lo_ranges = [None] + list(range(0, 10))
         for hi in hi_lo_ranges:
             for lo in hi_lo_ranges:
-                gen_one(outfile, test_name=test_name, gen_dart_call=gen_dart_call,
+                gen_one(outfile, test_name=test_name,
+                        gen_dart_call=gen_dart_call,
                         python_func=python_func, lo=lo, hi=hi)
+
 
     def null_to_zero(x):
         if x is not None:
@@ -154,116 +166,136 @@ if __name__ == "__main__":
         else:
             return 0
 
+
     with TestFile('bisect_left') as f:
         gen_hilo_range(
             f,
             'bisect_left',
             gen_dart_call=lambda arr_name, x, lo, hi:
-                dart_call(None, "bisect_left", arr_name, x, lo=lo, hi=hi),
+            dart_call(None, "bisect_left", arr_name, x, lo=lo, hi=hi),
+            python_func=lambda arr_name, x, lo, hi:
+            bisect_left(named_arrays[arr_name], x, lo=null_to_zero(lo), hi=hi))
+
+    with TestFile('list.bisectLeft') as f:
+        gen_hilo_range(
+            f,
+            'list.bisectLeft',
+            gen_dart_call=lambda arr_name, x, lo, hi:
+                dart_call(arr_name, "bisectLeft", x, low=lo, high=hi),
             python_func=lambda arr_name, x, lo, hi:
                 bisect_left(named_arrays[arr_name], x, lo=null_to_zero(lo), hi=hi))
 
-    # gen_hilo_range(
-    #     'list.bisectLeft',
-    #     gen_dart_call=lambda arr_name, x, lo, hi:
-    #         dart_call(arr_name, "bisectLeft", x, low=lo, high=hi),
-    #     python_func=lambda arr_name, x, lo, hi:
-    #         bisect_left(named_arrays[arr_name], x, lo=null_to_zero(lo), hi=hi))
-    #
-    # gen_hilo_range(
-    #     'bisect_right',
-    #     gen_dart_call=lambda arr_name, x, lo, hi:
-    #         dart_call(None, "bisect_right", arr_name, x, lo=lo, hi=hi),
-    #     python_func=lambda arr_name, x, lo, hi:
-    #         bisect_right(named_arrays[arr_name], x, lo=null_to_zero(lo), hi=hi))
-    #
-    # gen_hilo_range(
-    #     'list.bisectRight',
-    #     gen_dart_call=lambda arr_name, x, lo, hi:
-    #         dart_call(arr_name, "bisectRight", x, low=lo, high=hi),
-    #     python_func=lambda arr_name, x, lo, hi:
-    #         bisect_right(named_arrays[arr_name], x, lo=null_to_zero(lo), hi=hi))
-    #
-    # gen_hilo_range(
-    #     'bisect',
-    #     gen_dart_call=lambda arr_name, x, lo, hi:
-    #         dart_call(None, "bisect", arr_name, x, lo=lo, hi=hi),
-    #     python_func=lambda arr_name, x, lo, hi:
-    #         bisect(named_arrays[arr_name], x, lo=null_to_zero(lo), hi=hi))
-    #
-    # gen_hilo_range(
-    #     'index',
-    #     gen_dart_call=lambda arr_name, x, lo, hi:
-    #         dart_call(None, "index", arr_name, x, lo=lo, hi=hi),
-    #     python_func=lambda arr_name, x, lo, hi:
-    #         index(named_arrays[arr_name], x, lo=null_to_zero(lo), hi=hi))
-    #
-    # gen_one(
-    #     'find_lt',
-    #     gen_dart_call=lambda arr_name, x, lo, hi:
-    #         dart_call(None, "find_lt", arr_name, x, lo=lo, hi=hi),
-    #     python_func=lambda arr_name, x, lo, hi:
-    #         find_lt(named_arrays[arr_name], x),
-    #     hi=None, lo=None)
-    #
-    # gen_one(
-    #     'find_le',
-    #     gen_dart_call=lambda arr_name, x, lo, hi:
-    #         dart_call(None, "find_le", arr_name, x, lo=lo, hi=hi),
-    #     python_func=lambda arr_name, x, lo, hi:
-    #         find_le(named_arrays[arr_name], x),
-    #     hi=None, lo=None)
-    #
-    # gen_one(
-    #     'find_gt',
-    #     gen_dart_call=lambda arr_name, x, lo, hi:
-    #         dart_call(None, "find_gt", arr_name, x, lo=lo, hi=hi),
-    #     python_func=lambda arr_name, x, lo, hi:
-    #         find_gt(named_arrays[arr_name], x),
-    #     hi=None, lo=None)
-    #
-    # gen_one(
-    #     'find_ge',
-    #     gen_dart_call=lambda arr_name, x, lo, hi:
-    #         dart_call(None, "find_ge", arr_name, x, lo=lo, hi=hi),
-    #     python_func=lambda arr_name, x, lo, hi:
-    #         find_ge(named_arrays[arr_name], x),
-    #     hi=None, lo=None)
-    #
-    # gen_one(
-    #     'bsearchGreaterThan',
-    #     gen_dart_call=lambda arr_name, x, lo, hi:
-    #         dart_call(arr_name, "bsearchGreaterThan", x, low=lo, high=hi),
-    #     python_func=lambda arr_name, x, lo, hi:
-    #         find_gt(named_arrays[arr_name], x),
-    #     wrap_dart_call=lambda code, arr_name: f'{arr_name}[{code}]',
-    #     hi=None, lo=None)
-    #
-    # gen_one(
-    #     'bsearchLessThan',
-    #     gen_dart_call=lambda arr_name, x, lo, hi:
-    #         dart_call(arr_name, "bsearchLessThan", x, low=lo, high=hi),
-    #     python_func=lambda arr_name, x, lo, hi:
-    #         find_lt(named_arrays[arr_name], x),
-    #     wrap_dart_call=lambda code, arr_name: f'{arr_name}[{code}]',
-    #     hi=None, lo=None)
-    #
-    # gen_one(
-    #     'bsearchLessThanOrEqualTo',
-    #     gen_dart_call=lambda arr_name, x, lo, hi:
-    #         dart_call(arr_name, "bsearchLessThanOrEqualTo", x, low=lo, high=hi),
-    #     python_func=lambda arr_name, x, lo, hi:
-    #         find_le(named_arrays[arr_name], x),
-    #     wrap_dart_call=lambda code, arr_name: f'{arr_name}[{code}]',
-    #     hi=None, lo=None)
-    #
-    # gen_one(
-    #     'bsearchGreaterThanOrEqualTo',
-    #     gen_dart_call=lambda arr_name, x, lo, hi:
-    #         dart_call(arr_name, "bsearchGreaterThanOrEqualTo", x, low=lo, high=hi),
-    #     python_func=lambda arr_name, x, lo, hi:
-    #         find_ge(named_arrays[arr_name], x),
-    #     wrap_dart_call=lambda code, arr_name: f'{arr_name}[{code}]',
-    #     hi=None, lo=None)
+    with TestFile('bisect_right') as f:
+        gen_hilo_range(
+            f,
+            'bisect_right',
+            gen_dart_call=lambda arr_name, x, lo, hi:
+                dart_call(None, "bisect_right", arr_name, x, lo=lo, hi=hi),
+            python_func=lambda arr_name, x, lo, hi:
+                bisect_right(named_arrays[arr_name], x, lo=null_to_zero(lo), hi=hi))
+
+    with TestFile('list.bisectRight') as f:
+        gen_hilo_range(
+            f,
+            'list.bisectRight',
+            gen_dart_call=lambda arr_name, x, lo, hi:
+                dart_call(arr_name, "bisectRight", x, low=lo, high=hi),
+            python_func=lambda arr_name, x, lo, hi:
+                bisect_right(named_arrays[arr_name], x, lo=null_to_zero(lo), hi=hi))
+
+    with TestFile('bisect') as f:
+        gen_hilo_range(
+            f,
+            'bisect',
+            gen_dart_call=lambda arr_name, x, lo, hi:
+                dart_call(None, "bisect", arr_name, x, lo=lo, hi=hi),
+            python_func=lambda arr_name, x, lo, hi:
+                bisect(named_arrays[arr_name], x, lo=null_to_zero(lo), hi=hi))
+
+    with TestFile('index') as f:
+        gen_hilo_range(
+            f,
+            'index',
+            gen_dart_call=lambda arr_name, x, lo, hi:
+                dart_call(None, "index", arr_name, x, lo=lo, hi=hi),
+            python_func=lambda arr_name, x, lo, hi:
+                index(named_arrays[arr_name], x, lo=null_to_zero(lo), hi=hi))
+
+    with TestFile('finds') as f:
+        gen_one(
+            f,
+            'find_lt',
+            gen_dart_call=lambda arr_name, x, lo, hi:
+                dart_call(None, "find_lt", arr_name, x, lo=lo, hi=hi),
+            python_func=lambda arr_name, x, lo, hi:
+                find_lt(named_arrays[arr_name], x),
+            hi=None, lo=None)
+
+        gen_one(
+            f,
+            'find_le',
+            gen_dart_call=lambda arr_name, x, lo, hi:
+                dart_call(None, "find_le", arr_name, x, lo=lo, hi=hi),
+            python_func=lambda arr_name, x, lo, hi:
+                find_le(named_arrays[arr_name], x),
+            hi=None, lo=None)
+
+        gen_one(
+            f,
+            'find_gt',
+            gen_dart_call=lambda arr_name, x, lo, hi:
+                dart_call(None, "find_gt", arr_name, x, lo=lo, hi=hi),
+            python_func=lambda arr_name, x, lo, hi:
+                find_gt(named_arrays[arr_name], x),
+            hi=None, lo=None)
+
+        gen_one(
+            f,
+            'find_ge',
+            gen_dart_call=lambda arr_name, x, lo, hi:
+                dart_call(None, "find_ge", arr_name, x, lo=lo, hi=hi),
+            python_func=lambda arr_name, x, lo, hi:
+                find_ge(named_arrays[arr_name], x),
+            hi=None, lo=None)
+
+        gen_one(
+            f,
+            'bsearchGreaterThan',
+            gen_dart_call=lambda arr_name, x, lo, hi:
+                dart_call(arr_name, "bsearchGreaterThan", x, low=lo, high=hi),
+            python_func=lambda arr_name, x, lo, hi:
+                find_gt(named_arrays[arr_name], x),
+            wrap_dart_call=lambda code, arr_name: f'{arr_name}[{code}]',
+            hi=None, lo=None)
+
+        gen_one(
+            f,
+            'bsearchLessThan',
+            gen_dart_call=lambda arr_name, x, lo, hi:
+                dart_call(arr_name, "bsearchLessThan", x, low=lo, high=hi),
+            python_func=lambda arr_name, x, lo, hi:
+                find_lt(named_arrays[arr_name], x),
+            wrap_dart_call=lambda code, arr_name: f'{arr_name}[{code}]',
+            hi=None, lo=None)
+
+        gen_one(
+            f,
+            'bsearchLessThanOrEqualTo',
+            gen_dart_call=lambda arr_name, x, lo, hi:
+                dart_call(arr_name, "bsearchLessThanOrEqualTo", x, low=lo, high=hi),
+            python_func=lambda arr_name, x, lo, hi:
+                find_le(named_arrays[arr_name], x),
+            wrap_dart_call=lambda code, arr_name: f'{arr_name}[{code}]',
+            hi=None, lo=None)
+
+        gen_one(
+            f,
+            'bsearchGreaterThanOrEqualTo',
+            gen_dart_call=lambda arr_name, x, lo, hi:
+                dart_call(arr_name, "bsearchGreaterThanOrEqualTo", x, low=lo, high=hi),
+            python_func=lambda arr_name, x, lo, hi:
+                find_ge(named_arrays[arr_name], x),
+            wrap_dart_call=lambda code, arr_name: f'{arr_name}[{code}]',
+            hi=None, lo=None)
     #
     # print("}")
