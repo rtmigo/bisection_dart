@@ -41,7 +41,7 @@ jobs:
       #        run: dart test
 
       - name: Tests
-        run: dart test --platform ${{ matrix.platform }} --timeout 60
+        run: dart test --platform ${{ matrix.platform }} --timeout=60s
 
 
   analyze:
