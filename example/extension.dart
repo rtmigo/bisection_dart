@@ -11,7 +11,7 @@ void main() {
   print(arr.bisectLeft('D'));  // 3
 
   // Add an item to the list while keeping the list sorted
-  arr.insortLeft('D');
+  arr.insortRight('D');
   print(arr);  // [A, B, C, D, E]
 
   // Locate leftmost value greater than 'B'

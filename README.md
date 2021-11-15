@@ -1,3 +1,9 @@
+![Generic badge](https://img.shields.io/badge/status-it_works-ok.svg)
+[![Pub Package](https://img.shields.io/pub/v/bisection.svg)](https://pub.dev/packages/bisection)
+[![pub points](https://badges.bar/bisection/pub%20points)](https://pub.dev/packages/bisection/score)
+![Generic badge](https://img.shields.io/badge/testing_on-Windows_|_Linux-blue.svg)
+![Generic badge](https://img.shields.io/badge/testing_on-VM_|_Node_|_Chrome-blue.svg)
+
 # [bisection](https://github.com/rtmigo/bisection_dart)
 
 Library for searching in sorted lists and adding elements to sorted lists while
@@ -41,21 +47,21 @@ void main() {
   final arr = ['A', 'B', 'C', 'E'];
 
   // Find the index of an item in a sorted list
-  print(arr.bisectRight('B')); // 2
+  print(arr.bisectRight('B'));  // 2
 
   // Find the future index for a non-existent item
-  print(arr.bisectLeft('D')); // 3
+  print(arr.bisectLeft('D'));  // 3
 
   // Add an item to the list while keeping the list sorted
-  arr.insortLeft('D');
-  print(arr); // [A, B, C, D, E]
+  arr.insortRight('D');
+  print(arr);  // [A, B, C, D, E]
 
   // Locate leftmost value greater than 'B'
-  print(arr.bsearchGreaterThan('B')); // 2
+  print(arr.bsearchGreaterThan('B'));  // 2
 }
 ```
 
-Python `bisect` docs   | Dart `bisection` extension methods
+Python `bisect`        | Dart `bisection` extension methods
 -----------------------|--------------------------------------
 `bisect(arr, x)`       | `arr.bisectRight(x)`
 `bisect_left(arr, x)`  | `arr.bisectLeft(x)`
