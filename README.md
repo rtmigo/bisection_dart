@@ -10,8 +10,7 @@ Library for searching in sorted lists and adding elements to sorted lists while
 maintaining the order of the elements.
 
 Port of the Python [bisect](https://docs.python.org/3/library/bisect.html) with
-[search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists)
-.
+[search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists).
 
 ## Use bisect functions
 
@@ -23,17 +22,17 @@ void main() {
   final arr = ['A', 'B', 'C', 'E'];
 
   // Find the index of an item in a sorted list
-  print(bisect(arr, 'B')); // 2
+  print(bisect(arr, 'B'));  // 2
 
   // Find the future index for a non-existent item
-  print(bisect_left(arr, 'D')); // 3
+  print(bisect_left(arr, 'D'));  // 3
 
   // Add an item to the list while keeping the list sorted
   insort(arr, 'D');
-  print(arr); // [A, B, C, D, E]
+  print(arr);  // [A, B, C, D, E]
 
   // Find leftmost value greater than 'B'
-  print(find_gt(arr, 'B')); // C
+  print(find_gt(arr, 'B'));  // C
 }
 ```
 

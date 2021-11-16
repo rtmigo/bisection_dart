@@ -1,9 +1,10 @@
 name: bisection
-description: Port of the Python bisect library to the Dart language designed
-  specifically for sectarian bees.
+description: Searching in sorted lists and adding elements to sorted lists while
+  maintaining the order of the elements. Port of the Python bisect library
+
 repository: https://github.com/rtmigo/beesect_dart
 
-version: 0.2.0
+version: 0.3.0
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
