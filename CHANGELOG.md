@@ -1,3 +1,7 @@
+# 0.4.0
+
+- Added the `key` argument to the `bisect_*` and `insort_*` functions 
+
 # 0.3.1+1
 
 - The first version to be published on pub.dev

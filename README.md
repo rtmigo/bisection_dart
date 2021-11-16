@@ -95,7 +95,7 @@ import 'package:bisection/bisect.dart';
 
 void main() {
   final arr = ['zebrA', 'craB', 'coytE'];
-  // sorting by last letter  
+  // sorting by last char  
   insort(arr, 'lizarD', key: (String s) => s[s.length - 1]);
   print(arr); // [zebrA, craB, lizarD, coytE]
 }
