@@ -27,14 +27,11 @@ Comparator<E> argToComparator<E>(Comparator<E>? compare, ToKey<E, Object>? key) 
     if (key != null) {
       throw ArgumentError('Cannot specify both `key` and `compare` at the same time.');
     }
-
-    assert(compare != null && key == null);
     return compare;
   }
   if (key == null) {
     return _get_direct_comparator<E>();
   } else {
-    assert(compare == null && key != null);
     final keys_comparator = _get_direct_comparator<Object>();
     return (E a, E b) => keys_comparator(key(a), key(b));
   }
