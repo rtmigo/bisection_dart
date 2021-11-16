@@ -94,10 +94,10 @@ argument with the same name in Python.
 import 'package:bisection/bisect.dart';
 
 void main() {
-  final arr = ['zebrA', 'craB', 'coytE'];
+  final arr = ['zebrA', 'craB', 'coyotE'];
   // sorting by last char  
   insort(arr, 'lizarD', key: (String s) => s[s.length - 1]);
-  print(arr); // [zebrA, craB, lizarD, coytE]
+  print(arr); // [zebrA, craB, lizarD, coyotE]
 }
 ```
 
@@ -110,7 +110,7 @@ in [List.sort](https://api.flutter.dev/flutter/dart-core/List/sort.html).
 import 'package:bisection/extension.dart';
 
 void main() {
-  final arr = ['zebrA', 'craB', 'coytE'];
+  final arr = ['zebrA', 'craB', 'coyotE'];
 
   String lastChar(String s) => s[s.length - 1];
 
@@ -118,7 +118,7 @@ void main() {
       'lizarD',
       compare: (a, b) => lastChar(a).compareTo(lastChar(b)));
 
-  print(arr); // [zebrA, craB, lizarD, coytE]
+  print(arr); // [zebrA, craB, lizarD, coyotE]
 }
 ```
 

@@ -7,25 +7,25 @@
 import 'bisect.dart' as funcs;
 import 'src/_comparator.dart';
 
-extension SortedListExtension<T> on List<T> {
+extension SortedListExtension<E> on List<E> {
   /// Assuming the list is sorted, locate the insertion point for [item] in a to maintain sorted order.
-  int bisectLeft(T item, {Comparator<T>? compare, int low = 0, int? high}) {
+  int bisectLeft(E item, {Comparator<E>? compare, int low = 0, int? high}) {
     return funcs.bisect_left(this, item, compare: compare, lo: low, hi: high);
   }
 
   /// Similar to [bisectLeft], but returns an insertion point which comes after (to the right of)
   /// any existing entries of [item] in the list.
-  int bisectRight(T item, {Comparator<T>? compare, int low = 0, int? high}) {
+  int bisectRight(E item, {Comparator<E>? compare, int low = 0, int? high}) {
     return funcs.bisect_right(this, item, compare: compare, lo: low, hi: high);
   }
 
   /// Assuming the list is sorted, insert [item] in list in sorted order.
-  void insortLeft(T item, {Comparator<T>? compare, int low = 0, int? high}) {
+  void insortLeft(E item, {Comparator<E>? compare, int low = 0, int? high}) {
     this.insert(this.bisectLeft(item, compare: compare, low: low, high: high), item);
   }
 
   /// Similar to [insortLeft], but inserting [item] in list after any existing entries of [item].
-  void insortRight(T item, {Comparator<T>? compare, int low = 0, int? high}) {
+  void insortRight(E item, {Comparator<E>? compare, int low = 0, int? high}) {
     this.insert(this.bisectRight(item, compare: compare, low: low, high: high), item);
   }
 
@@ -33,8 +33,8 @@ extension SortedListExtension<T> on List<T> {
   ///
   /// If the element is found, the index of element is returned. If not found, -1
   /// is returned.
-  int bsearch(T x, {Comparator<T>? compare, int low = 0, int? high}) {
-    compare ??= get_comparator(null);
+  int bsearch(E x, {Comparator<E>? compare, int low = 0, int? high}) {
+    compare ??= genericToComparator(null);
     final i = this.bisectLeft(x, compare: compare, low: low, high: high);
     if (i != this.length && compare(this[i], x) == 0) {
       return i;
@@ -46,7 +46,7 @@ extension SortedListExtension<T> on List<T> {
   ///
   /// If the element is found, the index of element is returned. If not found, -1
   /// is returned.
-  int bsearchLessThan(T x, {Comparator<T>? compare}) {
+  int bsearchLessThan(E x, {Comparator<E>? compare}) {
     final i = this.bisectLeft(x, compare: compare);
     if (i != 0) {
       return i - 1;
@@ -58,7 +58,7 @@ extension SortedListExtension<T> on List<T> {
   ///
   /// If the element is found, the index of element is returned. If not found, -1
   /// is returned.
-  int bsearchLessThanOrEqualTo(T x, {Comparator<T>? compare}) {
+  int bsearchLessThanOrEqualTo(E x, {Comparator<E>? compare}) {
     final i = this.bisectRight(x, compare: compare);
     if (i != 0) {
       return i - 1;
@@ -70,7 +70,7 @@ extension SortedListExtension<T> on List<T> {
   ///
   /// If the element is found, the index of element is returned. If not found, -1
   /// is returned.
-  int bsearchGreaterThan(T x, {Comparator<T>? compare}) {
+  int bsearchGreaterThan(E x, {Comparator<E>? compare}) {
     final i = this.bisectRight(x, compare: compare);
     if (i != this.length) {
       return i;
@@ -82,7 +82,7 @@ extension SortedListExtension<T> on List<T> {
   ///
   /// If the element is found, the index of element is returned. If not found, -1
   /// is returned.
-  int bsearchGreaterThanOrEqualTo(T x, {Comparator<T>? compare}) {
+  int bsearchGreaterThanOrEqualTo(E x, {Comparator<E>? compare}) {
     final i = this.bisectLeft(x, compare: compare);
     if (i != this.length) {
       return i;
