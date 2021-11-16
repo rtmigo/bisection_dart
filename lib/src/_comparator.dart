@@ -22,15 +22,12 @@ Comparator<T> _get_direct_comparator<T>() {
 
 typedef ItemToKey<T, K> = K Function(T item);
 
-Comparator<T> _get_key_comparator<T, K>(ItemToKey<T, K> i2k) {
-  final keys_comparator = _get_direct_comparator<K>();
-  return (T a, T b) => keys_comparator(i2k(a), i2k(b));
-}
 
 Comparator<T> get_comparator<T>(ItemToKey<T, dynamic>? i2k) {
   if (i2k == null) {
     return _get_direct_comparator<T>();
   } else {
-    return _get_key_comparator(i2k);
+    final keys_comparator = _get_direct_comparator<dynamic>();
+    return (T a, T b) => keys_comparator(i2k(a), i2k(b));
   }
 }
