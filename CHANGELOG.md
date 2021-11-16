@@ -1,4 +1,4 @@
-# 0.4.1
+# 0.4.2
 
 - Added the `key` argument to the `bisect_*` and `insort_*` functions 
 
