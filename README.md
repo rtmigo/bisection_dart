@@ -101,8 +101,10 @@ void main() {
 }
 ```
 
-The other functions and methods take the `compare` argument, similar to the
-argument in `List.sort`.
+The other functions and methods take the `compare` argument,
+a [Comparator](https://api.flutter.dev/flutter/dart-core/Comparator.html)
+similar to the argument
+in [List.sort](https://api.flutter.dev/flutter/dart-core/List/sort.html).
 
 ```dart
 import 'package:bisection/extension.dart';
