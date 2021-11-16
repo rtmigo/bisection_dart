@@ -87,17 +87,17 @@ void main() {
 
 ## Custom sorting
 
-Functions `bisect_*` and `insort_*` take the `key` parameter, exactly like
-similar Python functions.
+Functions `bisect_*` and `insort_*` take the `key` argument, similar to the
+argument with the same name in Python.
 
 ```dart
 import 'package:bisection/bisect.dart';
 
 void main() {
   final arr = ['zebrA', 'craB', 'coytE'];
-  // sorting by last letter  
-  insort(arr, 'lizarD', key: (String s) => s[s.length-1]);
-  print(arr);  // [zebrA, craB, lizarD, coytE]
+  // sorting by last char  
+  insort(arr, 'lizarD', key: (String s) => s[s.length - 1]);
+  print(arr); // [zebrA, craB, lizarD, coytE]
 }
 ```
 
@@ -112,13 +112,13 @@ import 'package:bisection/extension.dart';
 void main() {
   final arr = ['zebrA', 'craB', 'coytE'];
 
-  String lastChar(String s) => s[s.length-1];
+  String lastChar(String s) => s[s.length - 1];
 
   arr.insortRight(
       'lizarD',
       compare: (a, b) => lastChar(a).compareTo(lastChar(b)));
 
-  print(arr);  // [zebrA, craB, lizarD, coytE]
+  print(arr); // [zebrA, craB, lizarD, coytE]
 }
 ```
 

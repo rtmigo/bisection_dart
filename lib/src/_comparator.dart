@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: (c) 2021 Artёm IG <github.com/rtmigo>
+// SPDX-License-Identifier: MIT
+
 /// Compares two items dynamically interpreting them as [Comparable<T>].
 int _compare_as_comparables<T>(T a, T b) {
   return (a as Comparable<T>).compareTo(b);
@@ -6,8 +9,6 @@ int _compare_as_comparables<T>(T a, T b) {
 int _compare_num(num a, num b) {
   return a.compareTo(b);
 }
-
-
 
 Comparator<T> _get_direct_comparator<T>() {
   if (T == int || T == double) {
@@ -19,24 +20,17 @@ Comparator<T> _get_direct_comparator<T>() {
   return _compare_as_comparables;
 }
 
-typedef ItemToKey<T,K> = K Function(T item);
+typedef ItemToKey<T, K> = K Function(T item);
 
-
-
-Comparator<T> _get_key_comparator<T,K>(ItemToKey<T,K> i2k) {
+Comparator<T> _get_key_comparator<T, K>(ItemToKey<T, K> i2k) {
   final keys_comparator = _get_direct_comparator<K>();
   return (T a, T b) => keys_comparator(i2k(a), i2k(b));
 }
 
-
-Comparator<T> get_comparator<T>(ItemToKey<T,dynamic>? i2k) {
-  if (i2k==null) {
+Comparator<T> get_comparator<T>(ItemToKey<T, dynamic>? i2k) {
+  if (i2k == null) {
     return _get_direct_comparator<T>();
   } else {
     return _get_key_comparator(i2k);
   }
 }
-
-
-
-
