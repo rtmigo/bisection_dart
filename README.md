@@ -13,6 +13,10 @@ Port of the Python [bisect](https://docs.python.org/3/library/bisect.html) with
 [search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists)
 .
 
+If you import `bisect.dart`, you will get functions with names like in the
+Python `bisect` package. If you import `extension.dart`, you will get methods
+that are more consistent with Dart design standards.
+
 `package:bisection/bisect.dart`  | `package:bisection/extension.dart`
 ---------------------------------|--------------------------------------
 `bisect(arr, x)`                 | `arr.bisectRight(x)`
@@ -81,11 +85,6 @@ void main() {
   print(arr.bsearchGreaterThan('C')); // 3
 }
 ```
-
-If you import `bisect.dart`, you will get functions with names like in the
-Python `bisect` package. If you import `extension.dart`, you will get methods
-that are more consistent with Dart design standards.
-
 
 ## Differences from Python bisect
 
