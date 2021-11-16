@@ -10,8 +10,7 @@ Library for searching in sorted lists and adding items while maintaining the
 sort order.
 
 Port of the Python [bisect](https://docs.python.org/3/library/bisect.html) with
-[search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists)
-.
+[search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists).
 
 ## Use bisect functions
 
