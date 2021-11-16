@@ -31,8 +31,6 @@ that are more consistent with Dart design standards.
 `find_gt(arr, x)`                | `arr[arr.bsearchGreaterThan(x)]`
 `find_ge(arr, x)`                | `arr[arr.bsearchGreaterThanOrEqualTo(x)]`
 
-
-
 ## Use bisect functions
 
 ```dart
@@ -84,6 +82,41 @@ void main() {
 
   // Locate leftmost value greater than 'C'
   print(arr.bsearchGreaterThan('C')); // 3
+}
+```
+
+## Custom sorting
+
+Functions `bisect_*` and `insort_*` take the `key` parameter, exactly like
+similar Python functions.
+
+```dart
+import 'package:bisection/bisect.dart';
+
+void main() {
+  final arr = ['zebrA', 'craB', 'coytE'];
+  // sorting by last letter  
+  insort(arr, 'lizarD', key: (String s) => s[s.length-1]);
+  print(arr);  // [zebrA, craB, lizarD, coytE]
+}
+```
+
+The other functions and methods take the `compare` argument, similar to the
+argument in `List.sort`.
+
+```dart
+import 'package:bisection/extension.dart';
+
+void main() {
+  final arr = ['zebrA', 'craB', 'coytE'];
+
+  String lastChar(String s) => s[s.length-1];
+
+  arr.insortRight(
+      'lizarD',
+      compare: (a, b) => lastChar(a).compareTo(lastChar(b)));
+
+  print(arr);  // [zebrA, craB, lizarD, coytE]
 }
 ```
 

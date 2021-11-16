@@ -34,7 +34,7 @@ extension SortedListExtension<T> on List<T> {
   /// If the element is found, the index of element is returned. If not found, -1
   /// is returned.
   int bsearch(T x, {Comparator<T>? compare, int low = 0, int? high}) {
-    compare ??= get_comparator();
+    compare ??= get_comparator(null);
     final i = this.bisectLeft(x, compare: compare, low: low, high: high);
     if (i != this.length && compare(this[i], x) == 0) {
       return i;
