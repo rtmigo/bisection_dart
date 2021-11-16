@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: (c) 2019 Artёm IG <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
-import 'package:beesect/beesect.dart';
+import 'package:bisection/bisection.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -43,62 +43,63 @@ void main() {
 
   test('index of', () {
     var list = ['A', 'C', 'E', 'G'];
-    expect(list.bisectIndex('E'), 2);
-    expect(()=>list.bisectIndex('F'), throwsA(isA<ItemNotFoundError>()));
+    expect(list.bsearch('E'), 2);
+    expect(list.bsearch('F'), -1);
   });
 
   var isNotFound = throwsA(isA<ItemNotFoundError>());
 
   test('rightmost less', () {
     var list = ['B', 'D', 'F'];
-    expect(()=>list.bisectIndexLT('A'), isNotFound);
-    expect(()=>list.bisectIndexLT('B'), isNotFound);
-    expect(list.bisectIndexLT('C'), 0);
-    expect(list.bisectIndexLT('D'), 0);
-    expect(list.bisectIndexLT('E'), 1);
-    expect(list.bisectIndexLT('F'), 1);
-    expect(list.bisectIndexLT('G'), 2);
+    expect(list.bsearchLessThan('A'), -1);
+    expect(list.bsearchLessThan('B'), -1);
+    expect(list.bsearchLessThan('C'), 0);
+    expect(list.bsearchLessThan('D'), 0);
+    expect(list.bsearchLessThan('E'), 1);
+    expect(list.bsearchLessThan('F'), 1);
+    expect(list.bsearchLessThan('G'), 2);
   });
 
   test('rightmost less equal', () {
     var list = ['B', 'D', 'F'];
-    expect(()=>list.bisectIndexLE('A'), isNotFound);
-    expect(list.bisectIndexLE('B'), 0);
-    expect(list.bisectIndexLE('C'), 0);
-    expect(list.bisectIndexLE('D'), 1);
-    expect(list.bisectIndexLE('E'), 1);
-    expect(list.bisectIndexLE('F'), 2);
-    expect(list.bisectIndexLE('G'), 2);
+    expect(list.bsearchLessThanOrEqualTo('A'), -1);
+    expect(list.bsearchLessThanOrEqualTo('B'), 0);
+    expect(list.bsearchLessThanOrEqualTo('C'), 0);
+    expect(list.bsearchLessThanOrEqualTo('D'), 1);
+    expect(list.bsearchLessThanOrEqualTo('E'), 1);
+    expect(list.bsearchLessThanOrEqualTo('F'), 2);
+    expect(list.bsearchLessThanOrEqualTo('G'), 2);
   });
 
   test('index gt: leftmost value greater than', () {
     var list = ['B', 'D', 'F'];
-    expect(list.bisectIndexGT('A'), 0);
-    expect(list.bisectIndexGT('B'), 1);
-    expect(list.bisectIndexGT('C'), 1);
-    expect(list.bisectIndexGT('D'), 2);
-    expect(list.bisectIndexGT('E'), 2);
-    expect(()=>list.bisectIndexGT('F'), isNotFound);
-    expect(()=>list.bisectIndexGT('G'), isNotFound);
+    expect(list.bsearchGreaterThan('A'), 0);
+    expect(list.bsearchGreaterThan('B'), 1);
+    expect(list.bsearchGreaterThan('C'), 1);
+    expect(list.bsearchGreaterThan('D'), 2);
+    expect(list.bsearchGreaterThan('E'), 2);
+    expect(list.bsearchGreaterThan('F'), -1);
+    expect(list.bsearchGreaterThan('G'), -1);
   });
 
   test('index ge: leftmost item greater than or equal to x', () {
     var list = ['B', 'D', 'F'];
-    expect(list.bisectIndexGE('A'), 0);
-    expect(list.bisectIndexGE('B'), 0);
-    expect(list.bisectIndexGE('C'), 1);
-    expect(list.bisectIndexGE('D'), 1);
-    expect(list.bisectIndexGE('E'), 2);
-    expect(list.bisectIndexGE('F'), 2);
-    expect(()=>list.bisectIndexGE('G'), isNotFound);
+    expect(list.bsearchGreaterThanOrEqualTo('A'), 0);
+    expect(list.bsearchGreaterThanOrEqualTo('B'), 0);
+    expect(list.bsearchGreaterThanOrEqualTo('C'), 1);
+    expect(list.bsearchGreaterThanOrEqualTo('D'), 1);
+    expect(list.bsearchGreaterThanOrEqualTo('E'), 2);
+    expect(list.bsearchGreaterThanOrEqualTo('F'), 2);
+    expect(list.bsearchGreaterThanOrEqualTo('G'), -1);
   });
 
   test('get items', () {
     var list = ['B', 'D', 'F'];
-    expect(list[list.bisectIndexLE('D')], 'D');
-    expect(list[list.bisectIndexLT('D')], 'B');
-    expect(list[list.bisectIndexGE('D')], 'D');
-    expect(list[list.bisectIndexGT('D')], 'F');
+    expect(()=>list[list.bsearchLessThan('B')], throwsRangeError);
+    expect(list[list.bsearchLessThanOrEqualTo('D')], 'D');
+    expect(list[list.bsearchLessThan('D')], 'B');
+    expect(list[list.bsearchGreaterThanOrEqualTo('D')], 'D');
+    expect(list[list.bsearchGreaterThan('D')], 'F');
   });
 
 }
