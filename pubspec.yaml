@@ -2,7 +2,7 @@ name: bisection
 description: Searching in sorted lists and adding elements to sorted lists while
   maintaining the order of the elements. Port of the Python bisect library
 
-repository: https://github.com/rtmigo/beesect_dart
+repository: https://github.com/rtmigo/bisection_dart
 
 version: 0.3.0
 
