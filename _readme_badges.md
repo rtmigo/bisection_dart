@@ -1,5 +1,0 @@
-![Generic badge](https://img.shields.io/badge/status-it_works-ok.svg)
-[![Pub Package](https://img.shields.io/pub/v/bisection.svg)](https://pub.dev/packages/bisection)
-[![pub points](https://badges.bar/bisection/pub%20points)](https://pub.dev/packages/bisection/score)
-![Generic badge](https://img.shields.io/badge/testing_on-Windows_|_Linux-blue.svg)
-![Generic badge](https://img.shields.io/badge/testing_on-VM_|_JS-blue.svg)

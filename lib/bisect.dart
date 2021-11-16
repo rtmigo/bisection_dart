@@ -60,8 +60,6 @@ int bisect_left<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}
   return lo;
 }
 
-
-
 /// Assuming the list is sorted, insert [item] in list in sorted order.
 void insort_left<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}) {
   a.insert(bisect_left(a, x, compare: compare, lo: lo, hi: hi), x);
