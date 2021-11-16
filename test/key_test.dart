@@ -74,4 +74,14 @@ void main() {
     // numbers are decreasing
     expect(sorted, ['Ax7', 'Bx6', 'Cx3', 'Ay8', 'Cy4', 'By2', 'Bz9', 'Az5', 'Cz1']);
   });
+
+  test('cannot specify both', () {
+    final arr = ['Cz1', 'By2', 'Cx3', 'Cy4', 'Az5', 'Bx6', 'Ax7', 'Ay8', 'Bz9'];
+    final keyFunc = (String e)=>e.length;
+    final compareFunc = (String a, String b) => a.length.compareTo(b.length);
+    expect(bisect(arr, 'B'), 8);
+    expect(bisect(arr, 'B', key: keyFunc), 0);
+    expect(bisect(arr, 'B', compare: compareFunc), 0);
+    expect(()=>bisect(arr, 'B', compare: compareFunc, key: keyFunc), throwsArgumentError);
+  });
 }

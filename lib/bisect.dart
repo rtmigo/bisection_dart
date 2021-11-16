@@ -13,8 +13,8 @@ import 'src/_comparator.dart';
 /// left of) any existing entries. The return value is suitable for use as the first parameter
 /// to `List.insert` assuming that a is already sorted.
 int bisect_left<E>(List<E> a, E x,
-    {Comparator<E>? compare, int lo = 0, int? hi, ToKey<E, dynamic>? key}) {
-  compare ??= genericToComparator<E>(key);
+    {int lo = 0, int? hi, ToKey<E, Object>? key, Comparator<E>? compare}) {
+  compare = argToComparator<E>(compare, key);
 
   if (lo < 0) {
     throw ArgumentError.value(lo, 'lo must be non-negative'); // in Python this disallowed too
@@ -42,8 +42,8 @@ int bisect_left<E>(List<E> a, E x,
 /// Similar to [bisect_left], but returns an insertion point which comes after (to the right of)
 /// any existing entries of [x] in [a].
 int bisect_right<E>(List<E> a, E x,
-    {Comparator<E>? compare, int lo = 0, int? hi, ToKey<E, dynamic>? key}) {
-  compare ??= genericToComparator<E>(key);
+    {int lo = 0, int? hi, ToKey<E, Object>? key, Comparator<E>? compare}) {
+  compare = argToComparator<E>(compare, key);
 
   if (lo < 0) {
     throw ArgumentError.value(lo, 'lo must be non-negative'); // in Python this disallowed too
@@ -71,21 +71,21 @@ int bisect_right<E>(List<E> a, E x,
 
 /// Assuming the list is sorted, insert [item] in list in sorted order.
 void insort_left<E>(List<E> a, E x,
-    {Comparator<E>? compare, ToKey<E, dynamic>? key, int lo = 0, int? hi}) {
+    {Comparator<E>? compare, ToKey<E, Object>? key, int lo = 0, int? hi}) {
   a.insert(bisect_left(a, x, compare: compare, lo: lo, hi: hi, key: key), x);
 }
 
 /// Similar to [insort_left], but inserting [item] in list after any existing entries of [item].
 void insort_right<E>(List<E> a, E x,
-    {Comparator<E>? compare, ToKey<E, dynamic>? key, int lo = 0, int? hi}) {
+    {Comparator<E>? compare, ToKey<E, Object>? key, int lo = 0, int? hi}) {
   a.insert(bisect_right(a, x, compare: compare, lo: lo, hi: hi, key: key), x);
 }
 
 ///Locate the leftmost value exactly equal to x
 int? index<E>(List<E> a, E x,
-    {Comparator<E>? compare, ToKey<E, dynamic>? key, int lo = 0, int? hi}) {
+    {Comparator<E>? compare, ToKey<E, Object>? key, int lo = 0, int? hi}) {
   // todo unit-test custom compare and key
-  compare ??= genericToComparator<E>(key);
+  compare = argToComparator<E>(compare, key);
   final i = bisect_left(a, x, compare: compare, lo: lo, hi: hi);
   if (i != a.length && compare(a[i], x) == 0) {
     return i;
@@ -104,7 +104,7 @@ E find_lt<E>(List<E> a, E x, {Comparator<E>? compare}) {
 }
 
 /// Find rightmost value less than or equal to x
-E find_le<E>(List<E> a, E x, {Comparator<E>? compare, ToKey<E, dynamic>? key}) {
+E find_le<E>(List<E> a, E x, {Comparator<E>? compare, ToKey<E, Object>? key}) {
   // todo unit-test custom compare and key
   int i = bisect_right(a, x, compare: compare, key: key);
   if (i != 0) {
@@ -114,7 +114,7 @@ E find_le<E>(List<E> a, E x, {Comparator<E>? compare, ToKey<E, dynamic>? key}) {
 }
 
 /// Find leftmost value greater than x
-E find_gt<E>(List<E> a, E x, {Comparator<E>? compare, ToKey<E, dynamic>? key}) {
+E find_gt<E>(List<E> a, E x, {Comparator<E>? compare, ToKey<E, Object>? key}) {
   // todo unit-test custom compare and key
   int i = bisect_right(a, x, compare: compare, key: key);
   if (i != a.length) {
@@ -124,7 +124,7 @@ E find_gt<E>(List<E> a, E x, {Comparator<E>? compare, ToKey<E, dynamic>? key}) {
 }
 
 /// Find leftmost item greater than or equal to x
-E find_ge<E>(List<E> a, E x, {Comparator<E>? compare, ToKey<E, dynamic>? key}) {
+E find_ge<E>(List<E> a, E x, {Comparator<E>? compare, ToKey<E, Object>? key}) {
   // todo unit-test custom compare and key
   int i = bisect_left(a, x, compare: compare, key: key);
   if (i != a.length) {
