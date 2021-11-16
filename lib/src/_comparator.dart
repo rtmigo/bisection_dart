@@ -22,12 +22,20 @@ Comparator<E> _get_direct_comparator<E>() {
 
 typedef ToKey<E, K> = K Function(E item);
 
+Comparator<E> argToComparator<E>(Comparator<E>? compare, ToKey<E, Object>? key) {
+  if (compare != null) {
+    if (key != null) {
+      throw ArgumentError('Cannot specify both `key` and `compare` at the same time.');
+    }
 
-Comparator<E> genericToComparator<E>(ToKey<E, dynamic>? e2k) {
-  if (e2k == null) {
+    assert(compare != null && key == null);
+    return compare;
+  }
+  if (key == null) {
     return _get_direct_comparator<E>();
   } else {
-    final keys_comparator = _get_direct_comparator<dynamic>();
-    return (E a, E b) => keys_comparator(e2k(a), e2k(b));
+    assert(compare == null && key != null);
+    final keys_comparator = _get_direct_comparator<Object>();
+    return (E a, E b) => keys_comparator(key(a), key(b));
   }
 }
