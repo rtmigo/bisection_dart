@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: (c) 2019 Artёm IG <github.com/rtmigo>
+// SPDX-FileCopyrightText: (c) 2019-2021 Artёm IG <github.com/rtmigo>
 // SPDX-License-Identifier: MIT
 
 // the bisect source in Python:
@@ -7,6 +7,39 @@
 
 import 'src/_comparator.dart';
 
+/// Locate the insertion point for x in a to maintain sorted order. The parameters [lo] and [hi]
+/// may be used to specify a subset of the list which should be considered; by default the entire
+/// list is used. If [x] is already present in [a], the insertion point will be before (to the
+/// left of) any existing entries. The return value is suitable for use as the first parameter
+/// to `List.insert` assuming that a is already sorted.
+int bisect_left<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}) {
+  compare ??= get_comparator<T>();
+
+  if (lo < 0) {
+    throw ArgumentError.value(lo, 'lo must be non-negative'); // in Python this disallowed too
+  }
+  if (hi != null && hi < 0) {
+    // Python allows negative `hi` values, but returns strange results.
+    // I failed to make a Dart code that returns the same, in particular in the case of `hi=-1`.
+    // But negative `hi` does not make sense. So we'll just disallow it
+    throw ArgumentError.value(lo, 'hi must be non-negative');
+  }
+
+  int h = hi ?? a.length;
+
+  while (lo < h) {
+    int mid = (lo + h) >> 1; // in Python it's `//2`
+    if (compare(a[mid], x) < 0) {
+      lo = mid + 1;
+    } else {
+      h = mid;
+    }
+  }
+  return lo;
+}
+
+/// Similar to [bisect_left], but returns an insertion point which comes after (to the right of)
+/// any existing entries of [x] in [a].
 int bisect_right<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}) {
   compare ??= get_comparator<T>();
 
@@ -31,32 +64,6 @@ int bisect_right<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi
     }
   }
 
-  return lo;
-}
-
-int bisect_left<T>(List<T> a, T x, {Comparator<T>? compare, int lo = 0, int? hi}) {
-  compare ??= get_comparator<T>();
-
-  if (lo < 0) {
-    throw ArgumentError.value(lo, 'lo must be non-negative'); // in Python this disallowed too
-  }
-  if (hi != null && hi < 0) {
-    // Python allows negative `hi` values, but returns strange results.
-    // I failed to make a Dart code that returns the same, in particular in the case of `hi=-1`.
-    // But negative `hi` does not make sense. So we'll just disallow it
-    throw ArgumentError.value(lo, 'hi must be non-negative');
-  }
-
-  int h = hi ?? a.length;
-
-  while (lo < h) {
-    int mid = (lo + h) >> 1; // in Python it's `//2`
-    if (compare(a[mid], x) < 0) {
-      lo = mid + 1;
-    } else {
-      h = mid;
-    }
-  }
   return lo;
 }
 
@@ -116,5 +123,8 @@ T find_ge<T>(List<T> a, T x, {Comparator<T>? compare}) {
   throw ArgumentError('Value not found');
 }
 
+/// Same as [bisect_right].
 const bisect = bisect_right;
+
+/// Same as [insort_right].
 const insort = insort_right;
