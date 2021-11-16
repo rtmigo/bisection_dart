@@ -14,6 +14,9 @@ void main() {
   insort(arr, 'D');
   print(arr);  // [A, B, C, D, E]
 
-  // Find leftmost value greater than 'B'
-  print(find_gt(arr, 'B'));  // C
+  // Locate leftmost value equal to 'C'
+  print(index(arr, 'C'));  //2
+
+  // Find leftmost value greater than 'C'
+  print(find_gt(arr, 'C'));  // D
 }

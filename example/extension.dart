@@ -14,7 +14,10 @@ void main() {
   arr.insortRight('D');
   print(arr);  // [A, B, C, D, E]
 
-  // Locate leftmost value greater than 'B'
-  print(arr.bsearchGreaterThan('B'));  // 2
+  // Locate leftmost value equal to 'C'
+  print(arr.bsearch('C'));  // 2
+
+  // Locate leftmost value greater than 'C'
+  print(arr.bsearchGreaterThan('C'));  // 3
 }
 
