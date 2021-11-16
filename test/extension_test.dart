@@ -47,7 +47,7 @@ void main() {
     expect(list.bsearch('F'), -1);
   });
 
-  var isNotFound = throwsA(isA<ItemNotFoundError>());
+  //var isNotFound = throwsA(isA<ItemNotFoundError>());
 
   test('rightmost less', () {
     var list = ['B', 'D', 'F'];
