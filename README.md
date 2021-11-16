@@ -32,6 +32,7 @@ that are more consistent with Dart design standards.
 `find_ge(arr, x)`                | `arr[arr.bsearchGreaterThanOrEqualTo(x)]`
 
 
+
 ## Use bisect functions
 
 ```dart
