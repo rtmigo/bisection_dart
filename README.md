@@ -88,7 +88,7 @@ void main() {
 ## Custom sorting
 
 Functions `bisect_*` and `insort_*` take the `key` argument, similar to the
-argument in Python.
+argument with the same name in Python.
 
 ```dart
 import 'package:bisection/bisect.dart';
