@@ -132,5 +132,5 @@ by [Dart unit tests](https://github.com/rtmigo/bisection_dart/tree/dev/test/gene
 .
 
 The only difference is that this library does not accept negative values of the
-`hi` argument. If the value is negative, an exception will be thrown. In the
+`hi` argument. If `hi` value is negative, an exception will be thrown. In the
 case of Python, a rather mysterious value would be returned.
