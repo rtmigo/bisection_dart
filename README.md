@@ -10,7 +10,7 @@ Library for searching in sorted lists and adding items while maintaining the
 sort order.
 
 Port of the Python [bisect](https://docs.python.org/3/library/bisect.html) with
-[search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists)
+binary [search functions](https://docs.python.org/3/library/bisect.html#searching-sorted-lists)
 .
 
 If you import `bisect.dart`, you will get functions with names like in the
@@ -41,20 +41,20 @@ void main() {
   final arr = ['A', 'B', 'C', 'E'];
 
   // Find the index of an item in a sorted list
-  print(bisect(arr, 'B')); // 2
+  print(bisect(arr, 'B'));  // 2
 
   // Find the future index for a non-existent item
-  print(bisect_left(arr, 'D')); // 3
+  print(bisect_left(arr, 'D'));  // 3
 
   // Add an item to the list while keeping the list sorted
   insort(arr, 'D');
-  print(arr); // [A, B, C, D, E]
+  print(arr);  // [A, B, C, D, E]
 
   // Locate leftmost value equal to 'C'
-  print(index(arr, 'C')); // 2
+  print(index(arr, 'C'));  // 2
 
   // Find leftmost value greater than 'C'
-  print(find_gt(arr, 'C')); // D
+  print(find_gt(arr, 'C'));  // D
 }
 ```
 
@@ -68,20 +68,20 @@ void main() {
   final arr = ['A', 'B', 'C', 'E'];
 
   // Find the index of an item in a sorted list
-  print(arr.bisectRight('B')); // 2
+  print(arr.bisectRight('B'));  // 2
 
   // Find the future index for a non-existent item
-  print(arr.bisectLeft('D')); // 3
+  print(arr.bisectLeft('D'));  // 3
 
   // Add an item to the list while keeping the list sorted
   arr.insortRight('D');
-  print(arr); // [A, B, C, D, E]
+  print(arr);  // [A, B, C, D, E]
 
   // Locate leftmost value equal to 'C'
-  print(arr.bsearch('C')); // 2
+  print(arr.bsearch('C'));  // 2
 
   // Locate leftmost value greater than 'C'
-  print(arr.bsearchGreaterThan('C')); // 3
+  print(arr.bsearchGreaterThan('C'));  // 3
 }
 ```
 
@@ -132,5 +132,5 @@ by [Dart unit tests](https://github.com/rtmigo/bisection_dart/tree/dev/test/gene
 .
 
 The only difference is that this library does not accept negative values of the
-`hi` argument. If the value is negative, an exception will be thrown. In the
+`hi` argument. If `hi` value is negative, an exception will be thrown. In the
 case of Python, a rather mysterious value would be returned.
